@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottom"
+    app:startDestination="@id/bottomNavFragmentOne">
+
+    <fragment
+        android:label="Graph"
+        android:id="@+id/bottomNavFragmentOne"
+        android:name="com.landenlabs.allThreadPenalty.FragBottomNavOne"
+        tools:layout="@layout/frag_bottom_nav_one"/>
+
+    <fragment
+        android:label="Page2"
+        android:id="@+id/bottomNavFragmentTwo"
+        android:name="com.landenlabs.allThreadPenalty.FragBottomNavTwo"
+        tools:layout="@layout/frag_bottom_nav_two"/>
+
+</navigation>

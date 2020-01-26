@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragBottomNavTwo">
+
+    <TextView
+        android:id="@+id/page2_text"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:textSize="32sp"
+        android:text="Dummy page for future stuff"
+        />
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/page2_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/logo_small"/>
+
+</RelativeLayout>

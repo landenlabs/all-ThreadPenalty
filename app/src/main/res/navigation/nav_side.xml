@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/bottomNavFragment">
+
+    <fragment
+        android:id="@+id/bottomNavFragment"
+        android:name="com.landenlabs.allThreadPenalty.FragBottomNavMain"
+        android:label="Graph"
+        tools:layout="@layout/frag_bottom_nav_main" />
+
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.landenlabs.allThreadPenalty.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/frag_about" />
+</navigation>
