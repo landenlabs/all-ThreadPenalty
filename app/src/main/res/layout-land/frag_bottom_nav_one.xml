@@ -117,6 +117,7 @@
         android:layout_margin="5dp"
         android:src="@drawable/share" />
 
+    <!--
     <ImageView
         android:id="@+id/imgFullscreen"
         android:layout_width="40dp"
@@ -126,6 +127,7 @@
         android:layout_margin="5dp"
         android:src="@drawable/fullscreen" />
 
+
     <ImageView
         android:id="@+id/imgSource"
         android:layout_width="40dp"
@@ -134,7 +136,7 @@
         android:layout_margin="5dp"
         android:layout_toStartOf="@id/imgFullscreen"
         android:src="@drawable/source" />
-
+    -->
 
     <View
         android:id="@+id/graph_divider1"
@@ -142,11 +144,10 @@
         android:layout_height="2dp"
         android:layout_alignParentBottom="true"
         android:background="#333"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         />
 
     <TextView
+        android:paddingTop="10dp"
         android:id="@+id/message_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

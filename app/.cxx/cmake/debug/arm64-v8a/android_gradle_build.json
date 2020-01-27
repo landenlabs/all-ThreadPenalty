@@ -1,0 +1,72 @@
+{
+  "stringTable": {
+    "0": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/.cxx/cmake/debug/arm64-v8a",
+    "1": "--target=aarch64-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/. -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/ldennis/Library/Android/sdk/ndk/20.0.5594570/build/cmake/platforms.cmake",
+    "/Users/ldennis/Library/Android/sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+    "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/ldennis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/.cxx/cmake/debug/arm64-v8a\" clean"
+  ],
+  "buildTargetsCommand": "/Users/ldennis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/.cxx/cmake/debug/arm64-v8a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "cppcode-Debug-arm64-v8a": {
+      "buildCommand": "/Users/ldennis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/.cxx/cmake/debug/arm64-v8a\" cppcode",
+      "buildType": "debug",
+      "toolchain": "4185745921",
+      "abi": "arm64-v8a",
+      "artifactName": "cppcode",
+      "files": [
+        {
+          "src": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/cppcode.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/threadPenalty.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/plog/plog.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/plogs/plogs.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/plogs/plogfile.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/plogJavaBridge.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/src/main/cpp/plogTester.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/app/build/intermediates/cmake/debug/obj/arm64-v8a/libcppcode.so"
+    }
+  },
+  "toolchains": {
+    "4185745921": {
+      "cppCompilerExecutable": "/Users/ldennis/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

@@ -112,11 +112,11 @@
 
             <TextView
                 android:id="@+id/x_title"
+                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/graph"
                 android:layout_marginTop="8dp"
-                android:layout_toStartOf="@id/imgSource"
                 android:maxLines="3"
                 android:text="@string/graph_x_title"
                 android:textColor="#222"
@@ -132,6 +132,7 @@
                 android:layout_margin="5dp"
                 android:src="@drawable/share" />
 
+            <!--
             <ImageView
                 android:id="@+id/imgFullscreen"
                 android:layout_width="40dp"
@@ -149,7 +150,7 @@
                 android:layout_margin="5dp"
                 android:layout_toStartOf="@id/imgFullscreen"
                 android:src="@drawable/source" />
-
+            -->
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

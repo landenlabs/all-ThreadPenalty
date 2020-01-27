@@ -111,8 +111,8 @@ void queryRuntimeInfo(JNIEnv *env, jobject instance) {
 
     // Query available memory size from a non-static public function
     // we need use an instance of JniHelper class to call JNI
-    long result = javaBridge.getMemory(instance);
-    LOGI("Runtime free memory size: %"  PRId64, result);
+    unsigned long  result = (unsigned long)javaBridge.getMemory(instance);
+    LOGI("Runtime free memory size: %lu" , result);
 }
 
 // Java bridge initialization called automatically

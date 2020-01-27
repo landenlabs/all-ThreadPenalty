@@ -161,7 +161,7 @@ double measureThreadPenalty(JNIEnv* env, bool setThreadAffinity, WORD processorC
                      threadIdx,
                      g_elapsed[threadIdx],
                      (unsigned int) g_value[threadIdx],
-                     g_apicId[threadIdx]);
+                     (unsigned int)g_apicId[threadIdx]);
     }
 
     // Sort thread elapsed times

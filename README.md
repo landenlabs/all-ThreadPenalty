@@ -23,6 +23,11 @@ The *share* button works to send a sample screen shot.
 * MinSDK 23
 * Using AndroidX libraries
 
+  
+[![Build status](https://travis-ci.org/landenlabs/all-ThreadPenalty.svg?branch=master)](https://travis-ci.org/landenlabs/all-ThreadPenalty)
+[![Known Vulnerabilities](https://snyk.io/test/github/landenlabs/all-ThreadPenalty/badge.svg)](https://snyk.io/test/github/landenlabs/all-ThreadPenalty)
+
+
 ## Screen shots
 
 Starting test in Portrait mode - shows silly clock threads running and scroll thread messages below graph

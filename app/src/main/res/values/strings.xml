@@ -19,7 +19,7 @@
     <string name="test_log_msg">%1$s  %2$s</string>
     <string name="test_riunning">Running</string>
     <string name="graph_title">Device - Model - Date</string>
-    <string name="graph_x_title">Seconds per Gap</string>
+    <string name="graph_x_title">Memory Access Gap</string>
     <string name="penalty_title">Thread Locality Penalty</string>
     <string name="clock1_label">Thread Clock (1 sec):</string>
     <string name="clock2_label">Thread Clock (2 sec):</string>

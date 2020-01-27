@@ -186,7 +186,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     private void fixUI(boolean onStart) {
         int orientation = this.getResources().getConfiguration().orientation;
         int vis = (!onStart ||  orientation == Configuration.ORIENTATION_PORTRAIT)
-             ? View.VISIBLE : View.INVISIBLE;
+             ? View.VISIBLE : View.GONE;
 
         setBarVisibility(vis);
 
@@ -249,7 +249,6 @@ public class FragBottomNavOne extends FragBottomNavBase
 
                         if (dataEvent.endGap >= GAP_END) {
                             stopTest();
-                            testProgressPercent.setText(R.string.test_done);
                             tv = new TextView(msgHolder.getContext());
                             tv.setText(tv.getResources().getString(R.string.test_log_done, timeStr));
                             msgHolder.addView(tv);
@@ -288,6 +287,8 @@ public class FragBottomNavOne extends FragBottomNavBase
             isTestRunning = false;
             testerThread.interrupt();
             testerThread = null;
+            testProgressPercent.setText(R.string.test_done);
+            startTestBtn.setChecked(false);
 
             // Stop silly timer threads
             stopTickThread(0);
@@ -370,7 +371,7 @@ public class FragBottomNavOne extends FragBottomNavBase
 
         String devTitle = Build.MANUFACTURER + " " + Build.MODEL + " (" + howCompiledMsg() + ") ";
         ((TextView)rootView.findViewById(R.id.graph_title)).setText(devTitle);
-        rootView.findViewById(R.id.imgFullscreen).setOnClickListener(view -> openWebPage());
+        // rootView.findViewById(R.id.imgFullscreen).setOnClickListener(view -> openWebPage());
         rootView.findViewById(R.id.graph_share).setOnClickListener(view -> {
             ShareUtil.shareScreen(requireActivity(), rootView, "Share All-ThreadPenalty", null);
         });
