@@ -29,6 +29,7 @@ The *share* button works to send a sample screen shot.
 ## Screen shots
 
 Starting test in Portrait mode - shows graph and thread messages.
+<p>
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg" width="300">
 
 
