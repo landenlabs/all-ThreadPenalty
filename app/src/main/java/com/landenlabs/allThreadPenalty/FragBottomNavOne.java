@@ -97,6 +97,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     private static final int GAP_END = 64;
     private static final int GAP_STEP = 1;
     private boolean doLongTestCycles = true;
+    private int numThreads = 4;
 
     // Thread event messages
     //  Text Message
@@ -247,8 +248,13 @@ public class FragBottomNavOne extends FragBottomNavBase
                 doLongTestCycles = item.isChecked();
                 return true;
             case R.id.setting_menu_one_2threads:
+                numThreads = 2;
+                break;
             case R.id.setting_menu_one_4threads:
+                numThreads = 4;
+                break;
             case R.id.setting_menu_one_6threads:
+                numThreads = 6;
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -369,7 +375,7 @@ public class FragBottomNavOne extends FragBottomNavBase
         testProgressPercent.setText(R.string.test_riunning);
 
         isTestRunning = true;
-        testerThread = new TesterThread();
+        testerThread = new TesterThread(doLongTestCycles, numThreads);
         getLifecycle().addObserver(testerThread);
         testerThread.start();
     }
@@ -461,6 +467,16 @@ public class FragBottomNavOne extends FragBottomNavBase
         GraphView graph = rootView.findViewById(R.id.graph);
         lineGraph.initGraph(graph, GAP_END);
 
+        int numProc = Runtime.getRuntime().availableProcessors();
+        ((TextView)rootView.findViewById(R.id.x_title)).setText(
+                graph.getResources().getString(R.string.graph_x_title, numProc,
+                (doLongTestCycles ? "long":"short"), numThreads ));
+
+        // versionName generated during build process, see build.gradle
+        String version = graph.getResources().getString(R.string.versionName);
+        ((TextView)rootView.findViewById(R.id.title)).setText(
+                graph.getResources().getString(R.string.penalty_title, version));
+
         String devTitle = Build.MANUFACTURER + " " + Build.MODEL + " (" + howCompiledMsg() + ") ";
         ((TextView)rootView.findViewById(R.id.graph_title)).setText(devTitle);
         // rootView.findViewById(R.id.imgFullscreen).setOnClickListener(view -> openWebPage());
@@ -484,12 +500,20 @@ public class FragBottomNavOne extends FragBottomNavBase
     // Tester run in a background thread, results added to a queue
 
     class TesterThread extends Thread implements LifecycleObserver {
+        final boolean doLongTest;
+        final int numThreads;
+        TesterThread(boolean doLongTest, int numThreads) {
+            this.doLongTest = doLongTest;
+            this.numThreads = numThreads;
+        }
         public void run() {
             DataEvent dataEvent = new DataEvent(1);
             try {
                 // Loop forever waiting on queue.
                 while (!isInterrupted() && dataEvent.startGap < GAP_END) {
-                    startThreadPenalty(dataEvent.startGap, dataEvent.endGap, dataEvent.stepGap, dataEvent.gapMilliseconds);
+                    startThreadPenalty(
+                            doLongTest, numThreads,
+                            dataEvent.startGap, dataEvent.endGap, dataEvent.stepGap, dataEvent.gapMilliseconds);
                     dataQueue.add(dataEvent);
                     dataEvent = new DataEvent(dataEvent.endGap + 1);
                     uiHandler.sendEmptyMessage(MORE_TEST_DATA);
@@ -524,7 +548,9 @@ public class FragBottomNavOne extends FragBottomNavBase
         System.loadLibrary("cppcode");
     }
 
-    public native void startThreadPenalty(int startGap, int endGap, int stepGap, long[] gapTimedMilliseconds);
+    public native void startThreadPenalty(
+            boolean doLongTestCycles, int numThreads,
+            int startGap, int endGap, int stepGap, long[] gapTimedMilliseconds);
 
     // Extra support methods callable by C++
     public native String howCompiledMsg();

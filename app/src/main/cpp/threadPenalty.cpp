@@ -41,8 +41,10 @@ typedef void *Thread_return_t;
 const pthread_attr_t *pthread_attr_default = NULL;
 #define MAX_THREADS 50
 
+const unsigned long LONG_TEST_CYCLES = 300000000;
+const unsigned long SHORT_TEST_CYCLES = 100000000;
 unsigned long g_distance = 1;
-unsigned long g_iteration_count = 300000000;
+unsigned long g_iteration_count = LONG_TEST_CYCLES;
 unsigned int g_thread_count = 4;
 
 typedef unsigned long Counter_t;
@@ -200,8 +202,12 @@ extern "C" {
 JNIEXPORT void JNICALL
 Java_com_landenlabs_allThreadPenalty_FragBottomNavOne_startThreadPenalty(
         JNIEnv* env, jobject instance,
+        jboolean  doLongTest, jint numThreads,
         jint startGap, jint endGap, jint stepGap,
         jlongArray gapTimedMilliseconds) {
+
+    g_iteration_count = doLongTest ? LONG_TEST_CYCLES : SHORT_TEST_CYCLES;
+    g_thread_count = (unsigned)std::max(2, std::min(MAX_THREADS, numThreads));
 
     jsize len = env->GetArrayLength(gapTimedMilliseconds);
     jlong *longArray = env->GetLongArrayElements(gapTimedMilliseconds, 0);

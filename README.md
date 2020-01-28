@@ -22,7 +22,6 @@ The *share* button works to send a sample screen shot.
 * Using **AndroidX** libraries
 
   
-[![Build status](https://travis-ci.org/landenlabs/all-ThreadPenalty.svg?branch=master)](https://travis-ci.org/landenlabs/all-ThreadPenalty)
 [![Known Vulnerabilities](https://snyk.io/test/github/landenlabs/all-ThreadPenalty/badge.svg)](https://snyk.io/test/github/landenlabs/all-ThreadPenalty)
 
 
@@ -36,12 +35,15 @@ Starting test in Portrait mode - shows graph and thread messages.
 Graphs from several devices in Landscape mode:
 
 ### Google Pixel 1 (64 bit)
+Graph shows that the concurrent access to similar locations is slower.
 ![Pixel 1](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel1-landscape-done.jpg)
 
 ### Samsung Galaxy S10 (64 bit) 
+Graph shows that the concurrent access to similar locations is slower.
 ![Galaxy S10](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s10-landscape-done.jpg)
 
 ### Samsung Galaxy S5 (32bit)
+The S5 had a very odd graph, possibly showing the opposite that its cpu's have very small caches and/or does not support true multi-threading.
 ![Galaxy s5](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s5-landscape-done.jpg)
 
 

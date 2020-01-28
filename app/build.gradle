@@ -34,7 +34,7 @@ android {
     
     // Save app version in string so resource can be used in layouts
     applicationVariants.all { variant ->
-        variant.resValue "string", "versionName", "version " + variant.versionName
+        variant.resValue "string", "versionName", "v" + variant.versionName
     }
 
     externalNativeBuild {
