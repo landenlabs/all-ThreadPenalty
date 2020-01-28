@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -65,6 +66,7 @@ public class ShareUtil {
     private static Bitmap getBitmap(@NonNull View view) {
         Bitmap screenBitmap =
                 Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        screenBitmap.eraseColor(Color.WHITE);
         Canvas canvas = new Canvas(screenBitmap);
         view.draw(canvas);
         return screenBitmap;

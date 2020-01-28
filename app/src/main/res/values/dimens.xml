@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="scrollHeightPortrait">100dp</dimen>
+    <dimen name="scrollHeightLandscape">0dp</dimen>
+</resources>

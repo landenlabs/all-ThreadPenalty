@@ -41,7 +41,7 @@ public class FragBottomNavTwo extends FragBottomNavBase {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, R.layout.frag_bottom_nav_two);
-        this.setHasOptionsMenu(true);
+        this.setHasOptionsMenu(true);   // See onCreateOptionsMenu
         setBarTitle("Two");
         return root;
     }
@@ -49,7 +49,7 @@ public class FragBottomNavTwo extends FragBottomNavBase {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuCompat.setGroupDividerEnabled(menu, true);
-        inflater.inflate(R.menu.menu_settings, menu);
+        inflater.inflate(R.menu.menu_settings_two, menu);
     }
 
     @Override

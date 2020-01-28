@@ -1,59 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FragBottomNavOne">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/penalty_title"
-        android:textSize="28sp" />
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="2">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/clock1_label"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tickView0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="00:00:00"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/clock2_label"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tickView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="00:00:00"
-            android:textSize="20sp" />
-    </GridLayout>
-
     <LinearLayout
+        android:id="@+id/progress_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
+        android:layout_below="@+id/title"
+        android:background="#2000"
+        android:orientation="horizontal">
 
         <ToggleButton
             android:id="@+id/startTestBtn"
@@ -69,117 +29,178 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:max="100"
-            tools:progress="50"
-            />
+            tools:progress="50" />
 
         <TextView
             android:id="@+id/testProgressPercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="50%"
-            android:textStyle="bold" />
-
+            android:paddingEnd="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="50%" />
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardFixedFrame"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/penalty_title"
+        android:textSize="28sp" />
+
+    <GridLayout
+        android:id="@+id/tick_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardElevation="2sp"
-        app:cardUseCompatPadding="true">
+        android:layout_below="@+id/progress_holder"
+        android:columnCount="2"
+        android:visibility="gone">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clock1_label"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/graph_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/graph_title"
-                android:layout_centerHorizontal="true"
-                android:textColor="#222"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tickView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="00:00:00" />
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/graph"
-                android:layout_below="@+id/graph_title"
-                android:layout_width="match_parent"
-                android:layout_height="150dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clock2_label"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/x_title"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/graph"
-                android:layout_marginTop="8dp"
-                android:maxLines="3"
-                android:text="@string/graph_x_title"
-                android:textColor="#222"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/graph_share"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignTop="@id/x_title"
-                android:layout_alignParentStart="true"
-                android:layout_margin="5dp"
-                android:src="@drawable/share" />
-
-            <!--
-            <ImageView
-                android:id="@+id/imgFullscreen"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignTop="@id/x_title"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="5dp"
-                android:src="@drawable/fullscreen" />
-
-            <ImageView
-                android:id="@+id/imgSource"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignTop="@id/x_title"
-                android:layout_margin="5dp"
-                android:layout_toStartOf="@id/imgFullscreen"
-                android:src="@drawable/source" />
-            -->
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#333"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
+        <TextView
+            android:id="@+id/tickView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="00:00:00" />
+    </GridLayout>
 
     <TextView
-        android:id="@+id/message_title"
-        android:layout_width="match_parent"
+        android:id="@+id/graph_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/penalty_thread_messages"
+        android:layout_below="@+id/tick_holder"
+
+        android:layout_centerHorizontal="true"
+        android:text="@string/graph_title"
+        android:textColor="#222"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <ScrollView
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp"
+        android:layout_above="@+id/x_title"
+        android:layout_below="@+id/graph_title" />
 
-        <LinearLayout
-            android:id="@+id/sample_holder"
+    <ImageView
+        android:id="@+id/graph_share"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@id/x_title"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp"
+        android:src="@drawable/share" />
+
+    <TextView
+        android:id="@+id/x_title"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_above="@+id/graph_divider1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="@string/graph_x_title"
+        android:textColor="#222"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@id/x_title"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:src="@drawable/logo_small" />
+
+    <!--
+    <ImageView
+        android:id="@+id/imgFullscreen"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/x_title"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:src="@drawable/fullscreen" />
+
+
+    <ImageView
+        android:id="@+id/imgSource"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/x_title"
+        android:layout_margin="5dp"
+        android:layout_toStartOf="@id/imgFullscreen"
+        android:src="@drawable/source" />
+    -->
+
+    <View
+        android:id="@+id/graph_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/message_holder"
+        android:background="#333" />
+
+    <RelativeLayout
+        android:id="@+id/message_holder"
+        android:layout_width="match_parent"
+        tools:layout_height="100dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            android:id="@+id/message_expand"
+            android:adjustViewBounds="true"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_alignTop="@+id/message_title"
+            android:layout_alignBottom="@+id/message_title"
+            android:src="@drawable/expand"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_toRightOf="@+id/message_expand"
+            android:id="@+id/message_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:paddingTop="10dp"
+            android:text="@string/penalty_thread_messages"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    </ScrollView>
+        <ScrollView
+            android:layout_below="@+id/message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
+            <LinearLayout
+                android:id="@+id/scroll_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
-</LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</RelativeLayout>

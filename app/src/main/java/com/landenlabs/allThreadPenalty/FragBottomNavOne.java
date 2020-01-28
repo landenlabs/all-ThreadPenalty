@@ -32,16 +32,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -70,14 +76,17 @@ import static com.landenlabs.allThreadPenalty.log.PLogs.PLOGS_WARN;
 public class FragBottomNavOne extends FragBottomNavBase
         implements View.OnClickListener, JniHandler.ShareMsg, Handler.Callback {
 
+    private Menu optionsMenu;
     private ToggleButton startTestBtn;
     private ViewGroup msgHolder;
+    private ViewGroup scrollHolder;
     private SeekBar testProgressBar;
     private TextView testProgressPercent;
     private String timeStr = "00:00";
 
     // Silly timer
     private long startMilli;
+    private View tickHolder;
     private TextView tickView0;
     private TextView tickView1;
 
@@ -87,6 +96,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     private static final int GAP_LENGTH = 2;
     private static final int GAP_END = 64;
     private static final int GAP_STEP = 1;
+    private boolean doLongTestCycles = true;
 
     // Thread event messages
     //  Text Message
@@ -134,18 +144,21 @@ public class FragBottomNavOne extends FragBottomNavBase
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, R.layout.frag_bottom_nav_one);
+        this.setHasOptionsMenu(true);   // See onCreateOptionsMenu
         setBarTitle("Thread Locality Penalty");
 
         PLog.setMinLevel(PLOG_INFO);
 
         startTestBtn = root.findViewById(R.id.startTestBtn);
         startTestBtn.setOnClickListener(this);
-        msgHolder = root.findViewById(R.id.sample_holder);
+        msgHolder = root.findViewById(R.id.message_holder);
+        scrollHolder = root.findViewById(R.id.scroll_holder);
         testProgressBar = root.findViewById(R.id.testProgressBar);
         testProgressPercent = root.findViewById(R.id.testProgressPercent);
         testProgressBar.setEnabled(false);
 
         // Silly background timer to demonstrate threads
+        tickHolder = root.findViewById(R.id.tick_holder);
         tickView0 = root.findViewById(R.id.tickView0);
         tickView1 = root.findViewById(R.id.tickView1);
 
@@ -159,6 +172,20 @@ public class FragBottomNavOne extends FragBottomNavBase
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        this.lineGraph.onSave(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            this.lineGraph.onRestore(savedInstanceState);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         if (uiHandler == null) {
@@ -166,15 +193,34 @@ public class FragBottomNavOne extends FragBottomNavBase
         }
         JniHandler.shareMsg = this;
         fixUI(true);
+        if (optionsMenu != null) {
+            MenuItem item = optionsMenu.findItem(R.id.setting_menu_one_long);
+            if (item != null) {
+                item.setChecked(doLongTestCycles);
+            }
+        }
+        if (startTestBtn != null) {
+            startTestBtn.setChecked(isTestRunning);
+        }
     }
 
     @Override
     public void onPause() {
+        fixUI(false);
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
         JniHandler.shareMsg = null;
         stopTest();
         uiHandler.removeMessages(MORE_TEST_DATA);
-        fixUI(false);
-        super.onPause();
+        super.onStop();
     }
 
     @Override
@@ -183,18 +229,31 @@ public class FragBottomNavOne extends FragBottomNavBase
         fixUI(true);
     }
 
-    private void fixUI(boolean onStart) {
-        int orientation = this.getResources().getConfiguration().orientation;
-        int vis = (!onStart ||  orientation == Configuration.ORIENTATION_PORTRAIT)
-             ? View.VISIBLE : View.GONE;
-
-        setBarVisibility(vis);
-
-        View bottomNavView = requireActivity().findViewById(R.id.bottomNavigation);
-        if (bottomNavView != null) {
-            bottomNavView.setVisibility(vis);
-        }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();   // Remove other items for now.
+        MenuCompat.setGroupDividerEnabled(menu, true);
+        inflater.inflate(R.menu.menu_settings_one, menu);
+        optionsMenu = menu;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        item.setChecked(!item.isChecked());
+
+        switch (item.getItemId()) {
+            case R.id.setting_menu_one_short:
+            case R.id.setting_menu_one_long:
+                doLongTestCycles = item.isChecked();
+                return true;
+            case R.id.setting_menu_one_2threads:
+            case R.id.setting_menu_one_4threads:
+            case R.id.setting_menu_one_6threads:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     // ---------------------------------------------------------------------------------------------
     @Override
     public void onClick(View view) {
@@ -234,9 +293,9 @@ public class FragBottomNavOne extends FragBottomNavBase
                 Events.QueueEvent event = dataQueue.take();
                 switch (event.eventType) {
                     case MSG:
-                        tv = new TextView(msgHolder.getContext());
+                        tv = new TextView(scrollHolder.getContext());
                         tv.setText(tv.getResources().getString(R.string.test_log_msg, timeStr, ((MsgEvent) event).msg));
-                        msgHolder.addView(tv);
+                        scrollHolder.addView(tv);
                         break;
                     case DATA:
                         DataEvent dataEvent = (DataEvent) event;
@@ -249,21 +308,54 @@ public class FragBottomNavOne extends FragBottomNavBase
 
                         if (dataEvent.endGap >= GAP_END) {
                             stopTest();
-                            tv = new TextView(msgHolder.getContext());
+                            tv = new TextView(scrollHolder.getContext());
                             tv.setText(tv.getResources().getString(R.string.test_log_done, timeStr));
-                            msgHolder.addView(tv);
+                            scrollHolder.addView(tv);
                         }
                         break;
                 }
             }
         } catch (Exception ex) {
-            tv = new TextView(msgHolder.getContext());
+            tv = new TextView(scrollHolder.getContext());
             tv.setText(tv.getResources().getString(R.string.test_log_error, timeStr, ex.getMessage()));
-            msgHolder.addView(tv);
+            scrollHolder.addView(tv);
         }
     }
 
     // ---------------------------------------------------------------------------------------------
+    // Class private methods
+
+    private void fixUI(boolean onStart) {
+        int orientation = this.getResources().getConfiguration().orientation;
+        boolean isPortrait = orientation == Configuration.ORIENTATION_PORTRAIT;
+
+        int vis = (!onStart || isPortrait)
+                ? View.VISIBLE : View.GONE;
+
+        setBarVisibility(vis);
+        View bottomNavView = requireActivity().findViewById(R.id.bottomNavigation);
+        if (bottomNavView != null) {
+            bottomNavView.setVisibility(vis);
+        }
+
+        // this.tickHolder.setVisibility(vis);
+
+        ViewGroup.LayoutParams lp = msgHolder.getLayoutParams();
+        lp.height = msgHolder.getResources().getDimensionPixelOffset(
+                       isPortrait
+                       ? R.dimen.scrollHeightPortrait
+                       : R.dimen.scrollHeightLandscape);
+        msgHolder.setLayoutParams(lp);
+
+        View progressHolder = requireActivity().findViewById(R.id.progress_holder);
+        RelativeLayout.LayoutParams rlp =  (RelativeLayout.LayoutParams)progressHolder.getLayoutParams();
+        if (isPortrait) {
+            rlp.addRule(RelativeLayout.BELOW, R.id.title);
+        } else {
+            rlp.removeRule(RelativeLayout.BELOW);
+        }
+        progressHolder.setLayoutParams(rlp);
+    }
 
     private void startTest() {
         // Silly background timer threads.
@@ -372,11 +464,16 @@ public class FragBottomNavOne extends FragBottomNavBase
         String devTitle = Build.MANUFACTURER + " " + Build.MODEL + " (" + howCompiledMsg() + ") ";
         ((TextView)rootView.findViewById(R.id.graph_title)).setText(devTitle);
         // rootView.findViewById(R.id.imgFullscreen).setOnClickListener(view -> openWebPage());
-        rootView.findViewById(R.id.graph_share).setOnClickListener(view -> {
-            ShareUtil.shareScreen(requireActivity(), rootView, "Share All-ThreadPenalty", null);
+        rootView.findViewById(R.id.graph_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String subject = Build.MANUFACTURER + " " + Build.DEVICE;
+                ShareUtil.shareScreen(FragBottomNavOne.this.requireActivity(), rootView, subject, null);
+            }
         });
     }
 
+    @SuppressWarnings("unused")
     private void openWebPage() {
         // Intent intent = new Intent(getActivity(), FullscreenActivity.class);
         // intent.putExtra(FullscreenExample.ARG_ID, helloWorld.name());

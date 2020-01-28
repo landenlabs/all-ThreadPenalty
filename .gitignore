@@ -4,7 +4,9 @@
 .gradle
 /local.properties
 /.idea
+/.cxx
 /build
+/hide
 /captures
 /app/build
 .DS_Store

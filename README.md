@@ -5,7 +5,6 @@ Android UI Test  [Home website](http://landenlabs.com/android/index.html)
   
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
 
-
 Using C++ Threads, access memory from multiple threads and measure access time. Plot graph of access time based on distance between memory locations accessed by concurrent threads.
 
 [Article on Thread Locality Penalty](http://landenlabs.com/code/locality.html)
@@ -32,22 +31,19 @@ The *share* button works to send a sample screen shot.
 
 Starting test in Portrait mode - shows silly clock threads running and scroll thread messages below graph
 
-![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-1.jpg)
-
-![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-2.jpg)
 
 ![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg)
 
 
-Landscape mode hides most of the useless data, leaving the graph
+Graphs from several devices
 
-![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-landscape-running-1.jpg)
 
-![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-landscape-running-2.jpg)
+![Pixel 1](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel1-landscape-done.jpg)
 
-![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-landscape-running-3.jpg)
+![Galaxy S10](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s10-landscape-done.jpg)
 
-![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-landscape-done.jpg)
+![Galaxy s5](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s5-landscape-done.jpg)
+
 
 ## Web Page  
   

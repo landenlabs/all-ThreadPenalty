@@ -20,9 +20,11 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <!--
-         android:configChanges="orientation|screenSize"
+         Prevent Activity from getting restarted by adding this attribute.
+            android:configChanges="orientation|screenSize"
          -->
         <activity android:name="com.landenlabs.allThreadPenalty.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
