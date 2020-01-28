@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorPrimaryDark">
 
     <TextView
+        app:autoSizeTextType="uniform"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -15,6 +19,8 @@
         android:text="@string/side_nav_header_1"/>
 
     <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="104dp"
         android:layout_height="104dp"
         android:layout_gravity="center"
@@ -30,4 +36,4 @@
         android:text="@string/versionName"
         android:layout_gravity="bottom|center_horizontal"/>
 
-</FrameLayout>
+</LinearLayout>

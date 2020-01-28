@@ -69,6 +69,11 @@ public class LineGraph implements LifecycleObserver {
         graphView.addSeries(mSeries);
     }
 
+    public void clear() {
+        DataPoint[] data = new DataPoint[0];
+        mSeries.resetData(data);
+    }
+
     public void append(int xValue, float yValue) {
         mSeries.appendData(new DataPoint(xValue, yValue), true, 100);
         graphView.getViewport().setMinX(0);
@@ -110,5 +115,14 @@ public class LineGraph implements LifecycleObserver {
             data[idx] = new DataPoint(minX++, dataYarray[idx]);
         }
         mSeries.resetData(data);
+    }
+
+    private static Bundle saveRestore = new Bundle();
+    public void save() {
+        saveRestore = new Bundle();
+        onSave(saveRestore);
+    }
+    public void restore() {
+        onRestore(saveRestore);
     }
 }

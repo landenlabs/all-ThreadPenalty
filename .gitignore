@@ -5,6 +5,8 @@
 /local.properties
 /.idea
 /.cxx
+/app/.cxx
+app/.cxx
 /build
 /hide
 /captures

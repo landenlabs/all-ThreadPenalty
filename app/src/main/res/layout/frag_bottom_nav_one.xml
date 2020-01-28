@@ -45,6 +45,8 @@
         app:autoSizeTextType="uniform"
         android:id="@+id/title"
         android:maxLines="1"
+        android:layout_marginLeft="200dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -171,7 +173,7 @@
     <RelativeLayout
         android:id="@+id/message_holder"
         android:layout_width="match_parent"
-        tools:layout_height="100dp"
+        tools:layout_height="@dimen/message_height1"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true" >
 
@@ -199,7 +201,7 @@
             android:layout_below="@+id/message_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
+             >
 
             <LinearLayout
                 android:id="@+id/scroll_holder"

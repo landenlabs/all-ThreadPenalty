@@ -1,4 +1,7 @@
 <resources>
     <dimen name="scrollHeightPortrait">100dp</dimen>
     <dimen name="scrollHeightLandscape">0dp</dimen>
+    <dimen name="message_height0">40dp</dimen>
+    <dimen name="message_height1">100dp</dimen>
+    <dimen name="message_height2">200dp</dimen>
 </resources>

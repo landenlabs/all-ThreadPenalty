@@ -6,8 +6,8 @@ android {
         applicationId "com.landenlabs.all_threadPenalty"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 10126
-        versionName "1.01.26"
+        versionCode 10128
+        versionName "1.01.28"
 
         // Limit languages to following list.
         resConfigs "en", "es"

@@ -37,6 +37,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -80,6 +81,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     private ToggleButton startTestBtn;
     private ViewGroup msgHolder;
     private ViewGroup scrollHolder;
+    private ImageView message_expand;
     private SeekBar testProgressBar;
     private TextView testProgressPercent;
     private String timeStr = "00:00";
@@ -96,8 +98,11 @@ public class FragBottomNavOne extends FragBottomNavBase
     private static final int GAP_LENGTH = 2;
     private static final int GAP_END = 64;
     private static final int GAP_STEP = 1;
+
     private boolean doLongTestCycles = true;
     private int numThreads = 4;
+    private int doCycleMenuId = R.id.setting_menu_one_long;
+    private int threadMenuId = R.id.setting_menu_one_4threads;
 
     // Thread event messages
     //  Text Message
@@ -138,7 +143,6 @@ public class FragBottomNavOne extends FragBottomNavBase
         dataQueue.add(new MsgEvent(msg));
     }
 
-
     // ---------------------------------------------------------------------------------------------
 
 
@@ -154,6 +158,9 @@ public class FragBottomNavOne extends FragBottomNavBase
         startTestBtn.setOnClickListener(this);
         msgHolder = root.findViewById(R.id.message_holder);
         scrollHolder = root.findViewById(R.id.scroll_holder);
+        message_expand = root.findViewById(R.id.message_expand);
+        message_expand.setOnClickListener(this);
+
         testProgressBar = root.findViewById(R.id.testProgressBar);
         testProgressPercent = root.findViewById(R.id.testProgressPercent);
         testProgressBar.setEnabled(false);
@@ -203,11 +210,14 @@ public class FragBottomNavOne extends FragBottomNavBase
         if (startTestBtn != null) {
             startTestBtn.setChecked(isTestRunning);
         }
+        initMenu();
+        lineGraph.restore();
     }
 
     @Override
     public void onPause() {
         fixUI(false);
+        lineGraph.save();
         super.onPause();
     }
 
@@ -236,27 +246,37 @@ public class FragBottomNavOne extends FragBottomNavBase
         MenuCompat.setGroupDividerEnabled(menu, true);
         inflater.inflate(R.menu.menu_settings_one, menu);
         optionsMenu = menu;
+        initMenu();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        item.setChecked(!item.isChecked());
-
-        switch (item.getItemId()) {
+        int id = item.getItemId();
+        switch (id) {
             case R.id.setting_menu_one_short:
+                doLongTestCycles = false;
+                doCycleMenuId = id;
+                break;
             case R.id.setting_menu_one_long:
-                doLongTestCycles = item.isChecked();
-                return true;
+                doLongTestCycles = true;
+                doCycleMenuId = id;
+                break;
             case R.id.setting_menu_one_2threads:
                 numThreads = 2;
+                threadMenuId = id;
                 break;
             case R.id.setting_menu_one_4threads:
                 numThreads = 4;
+                threadMenuId = id;
                 break;
             case R.id.setting_menu_one_6threads:
                 numThreads = 6;
+                threadMenuId = id;
                 break;
         }
+
+        initMenu();
+        setupGraph(root);
         return super.onOptionsItemSelected(item);
     }
 
@@ -265,6 +285,9 @@ public class FragBottomNavOne extends FragBottomNavBase
     public void onClick(View view) {
         //noinspection SwitchStatementWithTooFewBranches
         switch (view.getId()) {
+            case R.id.message_expand:
+                expandMessage();
+                break;
             case R.id.startTestBtn:
                 testPlogsToFile();
                 plogTester();
@@ -331,6 +354,35 @@ public class FragBottomNavOne extends FragBottomNavBase
     // ---------------------------------------------------------------------------------------------
     // Class private methods
 
+    private void  expandMessage() {
+        final int h0 = root.getResources().getDimensionPixelOffset(R.dimen.message_height0);
+        final int h1 = root.getResources().getDimensionPixelOffset(R.dimen.message_height1);
+        final int h2 = root.getResources().getDimensionPixelOffset(R.dimen.message_height2);
+
+        if (msgHolder != null) {
+            ViewGroup.LayoutParams lp = msgHolder.getLayoutParams();
+            int h = msgHolder.getHeight();
+            if (h == h0) {
+                lp.height = h1;
+            } else if (h == h1) {
+                lp.height = h2;
+            } else {
+                lp.height = h0;
+            }
+            msgHolder.setLayoutParams(lp);
+        }
+    }
+
+    private void initMenu() {
+        if (optionsMenu != null) {
+            for (int idx = 0; idx < optionsMenu.size(); idx++) {
+                MenuItem item = optionsMenu.getItem(idx);
+                boolean checked = (item.getItemId() == doCycleMenuId || item.getItemId() == threadMenuId);
+                item.setChecked(checked);
+            }
+        }
+    }
+
     private void fixUI(boolean onStart) {
         int orientation = this.getResources().getConfiguration().orientation;
         boolean isPortrait = orientation == Configuration.ORIENTATION_PORTRAIT;
@@ -373,6 +425,8 @@ public class FragBottomNavOne extends FragBottomNavBase
         testProgressBar.setMax(GAP_END);
         testProgressBar.setProgress(0);
         testProgressPercent.setText(R.string.test_riunning);
+
+        lineGraph.clear();
 
         isTestRunning = true;
         testerThread = new TesterThread(doLongTestCycles, numThreads);
@@ -461,21 +515,23 @@ public class FragBottomNavOne extends FragBottomNavBase
 
     private void setupGraph(View rootView) {
 
-        lineGraph = new LineGraph();
-        getLifecycle().addObserver(lineGraph);
+        if (lineGraph == null) {
+            lineGraph = new LineGraph();
+            getLifecycle().addObserver(lineGraph);
 
-        GraphView graph = rootView.findViewById(R.id.graph);
-        lineGraph.initGraph(graph, GAP_END);
+            GraphView graph = rootView.findViewById(R.id.graph);
+            lineGraph.initGraph(graph, GAP_END);
+        }
 
         int numProc = Runtime.getRuntime().availableProcessors();
         ((TextView)rootView.findViewById(R.id.x_title)).setText(
-                graph.getResources().getString(R.string.graph_x_title, numProc,
+                rootView.getResources().getString(R.string.graph_x_title, numProc,
                 (doLongTestCycles ? "long":"short"), numThreads ));
 
         // versionName generated during build process, see build.gradle
-        String version = graph.getResources().getString(R.string.versionName);
+        String version = rootView.getResources().getString(R.string.versionName);
         ((TextView)rootView.findViewById(R.id.title)).setText(
-                graph.getResources().getString(R.string.penalty_title, version));
+                rootView.getResources().getString(R.string.penalty_title, version));
 
         String devTitle = Build.MANUFACTURER + " " + Build.MODEL + " (" + howCompiledMsg() + ") ";
         ((TextView)rootView.findViewById(R.id.graph_title)).setText(devTitle);
