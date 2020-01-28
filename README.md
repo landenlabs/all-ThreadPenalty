@@ -29,28 +29,29 @@ The *share* button works to send a sample screen shot.
 
 Starting test in Portrait mode - shows graph and thread messages.
 <p>
+<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-2.jpg" width="300">
+
+<p>
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg" width="300">
 
 
 Graphs from several devices in Landscape mode:
 
-### Google Pixel 1 (64 bit)
-Graph shows that the concurrent access to similar locations is slower.
+ 
+Google Pixel1 - Graph shows that the concurrent access to similar locations is slower.
 ![Pixel 1](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel1-landscape-done.jpg)
 
-Graph shows that the concurrent access to similar locations is slower.
+Google Pixel 2 - Graph shows that the concurrent access to similar locations is slower.
 ![Pixel 2](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel2-landscape-done.jpg)
 
-Graph shows that the concurrent access to similar locations is slower.
+Google Nexus 5x - Graph shows very odd timing (need to repeat test)
 ![Nexus5x](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/nexus5x-landscape-done.jpg)
 
 
-### Samsung Galaxy S10 (64 bit) 
-Graph shows that the concurrent access to similar locations is slower.
+Samsung Galaxy S10 (64 bit) - Graph shows that the concurrent access to similar locations is slower.
 ![Galaxy S10](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s10-landscape-done.jpg)
 
-### Samsung Galaxy S5 (32bit)
-The S5 similar graph, similar location access by threads slower then far apart access. 
+Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads slower then far apart access. 
 ![Galaxy s5](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s5-landscape-done.jpg)
 
 
