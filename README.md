@@ -1,7 +1,6 @@
-
 # LanDen Labs - Thread Locality Penalty 
-Android UI Test  [Home website](http://landenlabs.com/android/index.html)  
-26-Jan-2020
+Android 26-Jan-2020
+[Home website](http://landenlabs.com/android/index.html)  
   
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
 
@@ -17,10 +16,10 @@ In this app only the main fragment page is populated, the rest is left as placeh
 
 The *share* button works to send a sample screen shot. 
 
-* Program is written in Java and C++.
+* Program is written in **Java** and **C++**.
 * Android SDK compile and target 28
 * MinSDK 23
-* Using AndroidX libraries
+* Using **AndroidX** libraries
 
   
 [![Build status](https://travis-ci.org/landenlabs/all-ThreadPenalty.svg?branch=master)](https://travis-ci.org/landenlabs/all-ThreadPenalty)
@@ -29,19 +28,19 @@ The *share* button works to send a sample screen shot.
 
 ## Screen shots
 
-Starting test in Portrait mode - shows silly clock threads running and scroll thread messages below graph
+Starting test in Portrait mode - shows graph and thread messages.
+<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg" width="300">
 
 
-![Test running](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg)
+Graphs from several devices in Landscape mode:
 
-
-Graphs from several devices
-
-
+### Google Pixel 1 (64 bit)
 ![Pixel 1](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel1-landscape-done.jpg)
 
+### Samsung Galaxy S10 (64 bit) 
 ![Galaxy S10](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s10-landscape-done.jpg)
 
+### Samsung Galaxy S5 (32bit)
 ![Galaxy s5](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s5-landscape-done.jpg)
 
 
@@ -52,7 +51,7 @@ Graphs from several devices
 ## License  
   
 ```  
-Copyright 2019 Dennis Lang  
+Copyright 2020 Dennis Lang  
   
 Licensed under the Apache License, Version 2.0 (the "License");  
 you may not use this file except in compliance with the License.  
