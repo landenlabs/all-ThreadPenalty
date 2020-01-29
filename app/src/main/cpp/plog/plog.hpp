@@ -29,7 +29,8 @@
 
 #include "plog/plog.h"
 
-// Pangea Log wrapper class
+// Private Log wrapper class
+// API for C++
 class PLog {
 public:
 
@@ -48,7 +49,6 @@ public:
 
 protected:
     PLog();
-
     ~PLog() noexcept;
 
     static PLog &instance();

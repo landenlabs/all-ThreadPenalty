@@ -27,8 +27,8 @@ extern "C" {
 #include "plogLevels.h"
 
 //
-// C->C++
-// Pangea Log wrapper class
+// Private Log wrapper class
+// API for C
 //
 
 // C callable to set minimum log level, defaults to PLOG_SILENT.

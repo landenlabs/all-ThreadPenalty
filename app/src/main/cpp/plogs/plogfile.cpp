@@ -27,7 +27,7 @@
 #include "plog/plog.hpp"
 
 static std::mutex mutex;
-#if PANGEA_TARGET_PLATFORM(ANDROID)
+#if CODE_TARGET_PLATFORM(ANDROID)
 
 // Send formatted message to file log.
 void PLogFile::printf(PLOG_LEVELS level, char const *const tag, char const *const format, ...) {

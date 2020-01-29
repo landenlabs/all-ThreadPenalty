@@ -23,19 +23,19 @@
 #include "plogs.hpp"
 #include <vector>
 
-#if PANGEA_TARGET_PLATFORM(IOS) || PANGEA_TARGET_PLATFORM(WINDOWS)
+#if CODE_TARGET_PLATFORM(IOS) || CODE_TARGET_PLATFORM(WINDOWS)
 
 #    include <cstdio>
 
 #endif
 
-#if PANGEA_TARGET_PLATFORM(ANDROID)
+#if CODE_TARGET_PLATFORM(ANDROID)
 
 #    include <android/log.h>
 
 #endif
 
-// namespace pangea::v2 {
+// namespace PLog {
 PLOG_LEVELS PLogs::minLevel_ = PLOG_SILENT;
 static std::vector<PLogs *> AVAILABLE_PLOGS(10);
 
@@ -61,7 +61,7 @@ void PLogs::setLevel(PLOG_LEVELS level) {
     minLevel_ = level;
 }
 
-#if PANGEA_TARGET_PLATFORM(ANDROID)
+#if CODE_TARGET_PLATFORM(ANDROID)
 
 void PLogs::printf(PLOG_LEVELS level, char const *const tag, char const *const format, ...) {
     if (level >= minLevel_) {
@@ -86,7 +86,7 @@ void PLogs::printv(PLOG_LEVELS level, char const *const tag, char const *format,
 }
 
 
-#elif PANGEA_TARGET_PLATFORM(IOS) || PANGEA_TARGET_PLATFORM(WINDOWS) || PANGEA_TARGET_PLATFORM(OSX)
+#elif CODE_TARGET_PLATFORM(IOS) || CODE_TARGET_PLATFORM(WINDOWS) || CODE_TARGET_PLATFORM(OSX)
 
 void PLogs::printf(PLOG_LEVELS level, char const* const tag, char const* const format, ...)  {
     va_list args;
@@ -111,4 +111,4 @@ void PLogs::printv(PLOG_LEVELS level, char const* const tag, char const* format,
 #endif
 
 
-// } // namespace pangea::v2
+// } // namespace PLog

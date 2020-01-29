@@ -23,25 +23,19 @@
 #pragma once
 
 #include "common.hpp"
-
 #include "plogs.hpp"
 
-
-#if PANGEA_TARGET_PLATFORM(IOS) || PANGEA_TARGET_PLATFORM(WINDOWS)
-
-#    include <cstdio>
-
+#if CODE_TARGET_PLATFORM(IOS) || CODE_TARGET_PLATFORM(WINDOWS)
+#include <cstdio>
 #endif
 
-#if PANGEA_TARGET_PLATFORM(ANDROID)
-
-#    include <stdio.h>
-
+#if CODE_TARGET_PLATFORM(ANDROID)
+#include <stdio.h>
 #endif
 
 
 //
-// Pangea log to file
+// Private log to file
 //
 // See premade collection in plogCollection.hpp
 // See related classes:  PlogFile, PlogNone, PLogSys
@@ -64,7 +58,6 @@ public:
 
     void printv(PLOG_LEVELS level, char const *const tag, char const *format, va_list &args);
 
-
 private:
     const char *accessMode_ = "a+";
     const char *filename_ = "/sdcard/plogfile.txt";
@@ -72,10 +65,7 @@ private:
     FILE *file_;
 
     bool open();
-
     void writeTimeLevelTag(PLOG_LEVELS level, const char *tag) const;
-
     void flush();
-
     void close();
 };

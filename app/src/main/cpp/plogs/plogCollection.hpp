@@ -22,7 +22,7 @@
  *
  */
 
-// PLogs - Collection of log groups each with their own log target
+// Private Logs - Collection of log groups each with their own log target
 #include "plogsys.hpp"      // PLogSys streams to default logger
 #include "plogfile.hpp"     // PLogFile streams to previously defined private file.
 #include "plognone.hpp"     // PLogNone ignores ALL logs.

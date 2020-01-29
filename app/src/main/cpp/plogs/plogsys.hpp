@@ -28,7 +28,7 @@
 #include "plogs.hpp"
 
 //
-// Pangea log to system default destination (Android system log file)
+// Private log to system default destination (Android system log file)
 //
 // See premade collection in plogCollection.hpp
 // See related classes:  PlogFile, PlogNone, PLogSys

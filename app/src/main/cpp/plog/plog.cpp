@@ -22,16 +22,12 @@
  */
 #include "plog.hpp"
 
-#if PANGEA_TARGET_PLATFORM(IOS) || PANGEA_TARGET_PLATFORM(WINDOWS)
-
-#    include <cstdio>
-
+#if CODE_TARGET_PLATFORM(IOS) || CODE_TARGET_PLATFORM(WINDOWS)
+#include <cstdio>
 #endif
 
-#if PANGEA_TARGET_PLATFORM(ANDROID)
-
-#    include <android/log.h>
-
+#if CODE_TARGET_PLATFORM(ANDROID)
+#include <android/log.h>
 #endif
 
 // namespace AllThreadTest::v2 {
@@ -51,7 +47,9 @@ void PLog::setLevel(PLOG_LEVELS level) {
     instance().minLevel_ = level;
 }
 
-#if PANGEA_TARGET_PLATFORM(ANDROID)
+#if CODE_TARGET_PLATFORM(ANDROID)
+// -------------------------------------------------------------------------------------------------
+// Android C++
 
 void PLog::printf(PLOG_LEVELS level, char const *const tag, char const *const format, ...) {
 
@@ -67,7 +65,6 @@ void PLog::printf(PLOG_LEVELS level, char const *const tag, char const *const fo
 }
 
 void PLog::print(PLOG_LEVELS level, char const *const tag, char const *const msg) {
-
     if (level >= instance().minLevel_) {
         __android_log_write(level, tag, msg);
     }
@@ -81,7 +78,7 @@ void PLog::printv(PLOG_LEVELS level, char const *const tag, char const *format, 
 }
 
 
-#elif PANGEA_TARGET_PLATFORM(IOS) || PANGEA_TARGET_PLATFORM(WINDOWS) || PANGEA_TARGET_PLATFORM(OSX)
+#elif CODE_TARGET_PLATFORM(IOS) || CODE_TARGET_PLATFORM(WINDOWS) || CODE_TARGET_PLATFORM(OSX)
 void PLog::printf(PLOG_LEVELS level, char const* const tag, char const* const format, ...) {
     va_list args;
     va_start(args, format);
@@ -102,8 +99,6 @@ void PLog::printv(PLOG_LEVELS level, char const* const tag, char const* format, 
     }
 }
 #endif
-
-
 
 // ----------------- C bridge ------------
 // TODO - Remove if no "C" code support requried.
@@ -126,7 +121,4 @@ void plogs_setLevel(PLOG_LEVELS level) {
 }
 }
 
-
-
-
-// } // namespace pangea::v2
+// } // namespace PLOG

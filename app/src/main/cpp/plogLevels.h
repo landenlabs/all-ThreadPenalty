@@ -20,10 +20,13 @@
  *  @see http://landenlabs.com
  *
  */
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma once
 
-
-// Move enum into plog.hpp if "C" access is not required.
+// PLog - private logger
+// TODO - Move enum into plog.hpp if "C" access is not required.
 enum _PLOG_LEVELS {
     PLOG_UNKNOWN = 0,
     PLOG_DEFAULT,
@@ -41,3 +44,4 @@ inline char levelId(PLOG_LEVELS plogLevel) {
     static const char LEVELS[] = {'?', '-', 'V', 'D', 'I', 'W', 'E', 'F'};
     return LEVELS[plogLevel & 0x7];
 }
+#pragma clang diagnostic pop

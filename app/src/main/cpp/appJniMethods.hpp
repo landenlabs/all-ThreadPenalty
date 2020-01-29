@@ -35,8 +35,8 @@ typedef struct app_context {
     JNIEnv *env;
     jclass jniHandlerClz;   // JniHandler class
     jobject jniHandlerObj;  // JniHandler  instance
-    jclass   testFragClz;
-    jobject  testFragObj;
+    // jclass   testFragClz;
+    // jobject  testFragObj;
     // pthread_mutex_t  lock;
     // int      done;
 } AppContext;
@@ -77,6 +77,7 @@ public:
         }
         appContext.env = env;
 
+        // NOTE - Change path to match your project package structure for class JniHandler
         jclass clz = env->FindClass("com/landenlabs/allThreadPenalty/penalty/JniHandler");
         appContext.jniHandlerClz = (jclass)env->NewGlobalRef(clz);
         jmethodID jniHandlerCtor = env->GetMethodID(appContext.jniHandlerClz, "<init>", "()V");
@@ -84,6 +85,7 @@ public:
         appContext.jniHandlerObj = env->NewGlobalRef(handlerObj);
 
         try {
+            // NOTE - Change to match method definition.
             versionFuncStatic = env->GetStaticMethodID(
                     appContext.jniHandlerClz, "getBuildVersion", "()Ljava/lang/String;");
             memFunc = env->GetMethodID(
@@ -100,6 +102,8 @@ public:
         return 0;
     }
 
+    // Call if you switch threads and need to use Java bridge
+    // See detachThread
     void attachThread(JNIEnv*& env) {
         JavaVM *javaVM = appContext.javaVM;
         jint res = (jint)javaVM->GetEnv((void **) &env, JNI_VERSION_1_6);
@@ -115,7 +119,8 @@ public:
         appContext.javaVM->DetachCurrentThread();
     }
 
-    // Helper - get app version info.
+    // Helper - get app version info from Java
+    // Demonstracte callig static Java method from C++
     std::string version;
     const std::string& getVersion() {
         JNIEnv *env = appContext.env;
@@ -129,6 +134,7 @@ public:
         return version;
     }
 
+    // Demonstrate calling object method from C++
     long getMemory(jobject instance) {
         JNIEnv *env = appContext.env;
         jlong result = env->CallLongMethod(instance, memFunc);
@@ -139,6 +145,8 @@ public:
      * A helper function to wrap java JniHelper::updateStatus(String msg)
      * JNI allow us to call this function via an instance even it is
      * private function.
+     *
+     * Send a formatting message to Java method.
      */
     static void sendJavaMsg(JNIEnv* threadEnv, char const *const fmt, ...) {
         va_list args;

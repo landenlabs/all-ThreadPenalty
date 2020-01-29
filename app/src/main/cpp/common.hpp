@@ -24,8 +24,8 @@
 
 #ifdef __cplusplus
 extern "C" {
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
+// #include <EGL/egl.h>
+// #include <GLES2/gl2.h>
 #include <jni.h>
 #include <errno.h>
 #include <android/sensor.h>
@@ -37,5 +37,5 @@ extern "C" {
 #endif
 
 #define ANDROID 1
-#define PANGEA_TARGET_PLATFORM(ANDROID) 123
+#define CODE_TARGET_PLATFORM(ANDROID) 123
 #undef OSX

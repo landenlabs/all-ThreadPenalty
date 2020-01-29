@@ -35,7 +35,7 @@
 
 #include "plog/plog.h"
 
-// Android log function wrappers
+// Log wrappers to call Private Logger
 static const char *kTAG = "PLogTagTm";
 #define LOGI(...) \
   ((void)plogs_printf(PLOG_INFO, kTAG, __VA_ARGS__))
@@ -61,10 +61,9 @@ const int MAX_THREADS = 2;
 TickContext g_ctx[MAX_THREADS];
 
 /* This is a trivial JNI example where we use a native method
- * to return a new VM String. See the corresponding Java source
- * file located at:
+ * to return a new VM String.
  *
- *   hello-jniCallback/app/src/main/java/com/example/hellojnicallback/MainActivity.java
+ * Return information about how this code was compiled.
  */
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_landenlabs_allThreadPenalty_FragBottomNavOne_howCompiledMsg(JNIEnv *env, jobject thiz) {
@@ -104,13 +103,12 @@ Java_com_landenlabs_allThreadPenalty_FragBottomNavOne_howCompiledMsg(JNIEnv *env
 
 AppJniMethods javaBridge;
 
-// Just for fun and example of how to do it.
+// C++ example calling Java methods
 void queryRuntimeInfo(JNIEnv *env, jobject instance) {
     // Find out which OS we are running on. It does not matter for this app
     LOGI("Android Version - %s", javaBridge.getVersion().c_str());
 
     // Query available memory size from a non-static public function
-    // we need use an instance of JniHelper class to call JNI
     unsigned long  result = (unsigned long)javaBridge.getMemory(instance);
     LOGI("Runtime free memory size: %lu" , result);
 }
@@ -128,10 +126,15 @@ void queryRuntimeInfo(JNIEnv *env, jobject instance) {
  *     the pairing function JNI_OnUnload() never gets called at all.
  */
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
+
+    // 1. Setup Java bridge (JNI)
     JNIEnv *env;
     javaBridge = AppJniMethods::init(vm, env);
+
+    // 2. Demonstrate calling some Java methods (just for fun)
     queryRuntimeInfo(env, javaBridge.appContext.jniHandlerObj);
 
+    // 3. Initialize ThreadPenalty data structure.
     memset(&g_ctx, 0, sizeof(g_ctx));
     for (int idx = 0; idx < MAX_THREADS; idx++) {
         g_ctx[idx].interrupt = false;
@@ -143,8 +146,12 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 }
 
 /*
- * Main working thread function. From a pthread,
- *     calling back to MainActivity::updateTimer() to display ticks on UI
+ * For Demonstration only (not part of Thread Locality Penalty)
+ *
+ * C++ method called by a pthread which in turn calls up to Java every 'n' seconds.
+ * From a pthread,
+ *     calling back to javaClass::updateTimer() to display ticks on UI
+ *     call PLog to test private logger.
  *     calling back to JniHelper::updateStatus(String msg) for msg
  */
 void* UpdateTicks(void *context) {
@@ -152,9 +159,10 @@ void* UpdateTicks(void *context) {
     JNIEnv* threadEnv;
     javaBridge.attachThread(threadEnv);
 
-    // Get testFrag "updateTimer" function
+    // Get  "updateTimer" function on its associated class instance.
     javaBridge.updateTimerJavaId = threadEnv->GetMethodID(pctx->testFragClz,  "updateTimer", "(I)V");
 
+    // Two possible time intervals, selected by parameter passed inside TickContext.
     struct timeval beginTime, curTime, usedTime, leftTime;
     const struct timeval kOneSecond = {
             (__kernel_time_t) 1,
@@ -206,8 +214,8 @@ void* UpdateTicks(void *context) {
     return context;
 }
 
+// Example thread which periodically calls a Java side method every 'n' seconds.
 // Java callable -
-// Example thread which periodically calls a Java side method.
 extern "C" JNIEXPORT void JNICALL
 Java_com_landenlabs_allThreadPenalty_FragBottomNavOne_startTickThread(
         JNIEnv *env, jobject instance, jint threadIdx) {
@@ -234,12 +242,8 @@ Java_com_landenlabs_allThreadPenalty_FragBottomNavOne_startTickThread(
     pthread_attr_destroy(&threadAttr_);
 }
 
+// Stop tick timer thread.
 // Java callable -
-/*
- * Interface to Java side to stop ticks:
- *    we need to hold and make sure our native thread has finished before return
- *    for a clean shutdown. The caller is from onPause
- */
 extern "C" JNIEXPORT void JNICALL
 Java_com_landenlabs_allThreadPenalty_FragBottomNavOne_stopTickThread(JNIEnv *env, jobject instance, jint idx) {
     pthread_mutex_lock(&g_ctx[idx].lock);

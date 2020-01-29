@@ -20,6 +20,8 @@
  *  @see http://landenlabs.com
  *
  */
+
+
 #include <pthread.h>
 #include <sys/time.h>
 #include <unistd.h>
@@ -37,6 +39,16 @@ typedef void *Thread_return_t;
 #include "plog/plog.hpp"
 #include "appJniMethods.hpp"
 
+//
+// Measure Thread Locality Penalty
+//
+// Concurrent access and modification within a Process/Core cache may get invalidated and flushed
+// causing delay to fetch the updated memory prior to allowing subsequent access.
+//
+// http://landenlabs.com/code/locality.html
+// https://www.drdobbs.com/parallel/maximize-locality-minimize-contention/208200273
+// https://mechanical-sympathy.blogspot.com/2013/02/cpu-cache-flushing-fallacy.html
+//
 #define USECSPERSEC 1000000
 const pthread_attr_t *pthread_attr_default = NULL;
 #define MAX_THREADS 50
@@ -59,12 +71,12 @@ typedef struct timeval Tics_t;
 typedef unsigned int WORD;
 const char TAG[] = "ThreadPenalty";
 
-/* ------------------------------------------------------------------------- */
+// ------------------------------------------------------------------------- 
 void get_time(Tics_t *pTics) {
     gettimeofday(pTics, NULL);
 }
 
-/* ------------------------------------------------------------------------ */
+// -------------------------------------------------------------------------
 double secondsElapsed(Tics_t end, Tics_t start) {
     Tics_t delta;
 
@@ -79,7 +91,7 @@ double secondsElapsed(Tics_t end, Tics_t start) {
     return delta.tv_sec + (double) delta.tv_usec / 1e6;
 }
 
-/* ------------------------------------------------------------------------- */
+// ------------------------------------------------------------------------- 
 Thread_return_t runLocalityTest(void *who_data) {
     int who = (int) (unsigned long) who_data;
     volatile Counter_t &counter = g_pCounter[who * (g_distance)];
@@ -116,7 +128,7 @@ Thread_return_t runLocalityTest(void *who_data) {
 
 bool sortElepased (double i, double j) { return (i<j); }
 
-/* ------------------------------------------------------------------------- */
+// ------------------------------------------------------------------------- 
 double measureThreadPenalty(JNIEnv* env, bool setThreadAffinity, WORD processorCount) {
     Tics_t start, end;
     double deltaSeconds;
@@ -166,15 +178,17 @@ double measureThreadPenalty(JNIEnv* env, bool setThreadAffinity, WORD processorC
                      (unsigned int)g_apicId[threadIdx]);
     }
 
+    // Return median average timing result.
     // Sort thread elapsed times
-    // Discard smallest and largest
+    // Discard smallest and largest (if more than 2 samples.
     // Return average of middle values.
     std::sort(&g_elapsed[0], &g_elapsed[g_thread_count], sortElepased);
     deltaSeconds = 0;
-    for (unsigned idx = 1; idx < g_thread_count-1; idx++) {
+    unsigned skip = g_thread_count > 2 ? 1 : 0;
+    for (unsigned idx = skip; idx < g_thread_count-skip; idx++) {
         deltaSeconds += g_elapsed[idx];
     }
-    return deltaSeconds / (g_thread_count-2);
+    return deltaSeconds / (g_thread_count-(skip+skip));
 }
 
 // Iterate over gap range startGap..endGap by stepGap
@@ -199,12 +213,18 @@ void threadPenalty(JNIEnv* env, jint startGap, jint endGap, jint stepGap, size_t
 #include <jni.h>
 
 extern "C" {
+// Run test to measure Thread Locality Penalty
+// Java callable -
 JNIEXPORT void JNICALL
 Java_com_landenlabs_allThreadPenalty_FragBottomNavOne_startThreadPenalty(
         JNIEnv* env, jobject instance,
-        jboolean  doLongTest, jint numThreads,
-        jint startGap, jint endGap, jint stepGap,
-        jlongArray gapTimedMilliseconds) {
+        jboolean  doLongTest,   // whether long or short test cycle
+        jint numThreads,        // number of concurrent threads to execute, typical value is 4
+        jint startGap,          // starting memory gap, [1..64]
+        jint endGap,            // ending memory gap, [1..64]
+        jint stepGap,           // step size to increase gap from start to end.
+        jlongArray gapTimedMilliseconds) // Returned timing results
+        {
 
     g_iteration_count = doLongTest ? LONG_TEST_CYCLES : SHORT_TEST_CYCLES;
     g_thread_count = (unsigned)std::max(2, std::min(MAX_THREADS, numThreads));

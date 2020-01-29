@@ -27,7 +27,7 @@
 #include "plogs.hpp"
 
 //
-// Pangea log to nothing (suppress all logging output).
+// Private log to nothing (suppress all logging output).
 //
 // See premade collection in plogCollection.hpp
 // See related classes:  PlogFile, PlogNone, PLogSys
@@ -44,6 +44,5 @@ public:
 
     void print(PLOG_LEVELS level, char const *const tag, char const *const msg) const {}
 
-    void
-    printv(PLOG_LEVELS level, char const *const tag, char const *const fmt, va_list &args) const {}
+    void  printv(PLOG_LEVELS level, char const *const tag, char const *const fmt, va_list &args) const {}
 };
