@@ -33,11 +33,19 @@ Starting test in Portrait mode - shows graph and thread messages.
 
 <p>
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg" width="300">
-
-
+<p>
+ 
+Samples of App User Interface:
+<p>
+<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/about-page.jpg" width="300">    
+<p>
+<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/side-nav.jpg" width="300"> 
+<p>
+<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/side-menu.jpg" width="300"> 
+  
+<p>  
 Graphs from several devices in Landscape mode:
 
- 
 Google Pixel1 - Graph shows that the concurrent access to similar locations is slower.
 ![Pixel 1](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel1-landscape-done.jpg)
 
