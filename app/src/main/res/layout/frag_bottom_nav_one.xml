@@ -45,7 +45,6 @@
         app:autoSizeTextType="uniform"
         android:id="@+id/title"
         android:maxLines="1"
-        android:layout_marginLeft="200dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,6 +99,17 @@
         android:text="@string/graph_title"
         android:textColor="#222"
         android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        app:autoSizeTextType="uniform"
+        android:id="@+id/graph_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tick_holder"
+        android:layout_alignParentRight="true"
+        tools:text="1.2sec"
+        android:textColor="#222"
         android:textStyle="bold" />
 
     <com.jjoe64.graphview.GraphView

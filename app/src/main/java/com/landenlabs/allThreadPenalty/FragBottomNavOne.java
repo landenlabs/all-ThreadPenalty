@@ -84,6 +84,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     private ImageView message_expand;
     private SeekBar testProgressBar;
     private TextView testProgressPercent;
+    private TextView graphTime;
     private String timeStr = "00:00";
 
     // Silly timer
@@ -283,7 +284,6 @@ public class FragBottomNavOne extends FragBottomNavBase
     // ---------------------------------------------------------------------------------------------
     @Override
     public void onClick(View view) {
-        //noinspection SwitchStatementWithTooFewBranches
         switch (view.getId()) {
             case R.id.message_expand:
                 expandMessage();
@@ -474,6 +474,7 @@ public class FragBottomNavOne extends FragBottomNavBase
             } else {
                 tickView1.setText(timeStr);
             }
+            graphTime.setText(timeStr);
         });
     }
 
@@ -543,6 +544,8 @@ public class FragBottomNavOne extends FragBottomNavBase
                 ShareUtil.shareScreen(FragBottomNavOne.this.requireActivity(), rootView, subject, null);
             }
         });
+
+        graphTime = rootView.findViewById(R.id.graph_time);
     }
 
     @SuppressWarnings("unused")
