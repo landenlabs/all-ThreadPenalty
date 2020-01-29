@@ -1,5 +1,6 @@
+
 # LanDen Labs - Thread Locality Penalty 
-Android 26-Jan-2020
+Android 29-Jan-2020
 [Home website](http://landenlabs.com/android/index.html)  
   
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
@@ -32,19 +33,23 @@ Starting test in Portrait mode - shows graph and thread messages.
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-2.jpg" width="300">
 
 <p>
+Pressing on Thread Messages expand icon cycles height of Message area:<br>
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg" width="300">
 <p>
  
-Samples of App User Interface:
+**Samples of App User Interface:**
 <p>
+About page <br>
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/about-page.jpg" width="300">    
 <p>
+Side Navigation <br>
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/side-nav.jpg" width="300"> 
 <p>
+Side Menu <br>
 <img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/side-menu.jpg" width="300"> 
   
 <p>  
-Graphs from several devices in Landscape mode:
+**Graphs from several devices in Landscape mode:**
 
 Google Pixel1 - Graph shows that the concurrent access to similar locations is slower.
 ![Pixel 1](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel1-landscape-done.jpg)
@@ -66,6 +71,12 @@ Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads sl
 ## Web Page  
   
 [Home web page](http://landenlabs.com/android/index.html) for more information.  
+
+[Discussion about Thread Locality Penalty](http://landenlabs.com/code/locality.html)
+
+[CPU hardware cache ](https://mechanical-sympathy.blogspot.com/2013/02/cpu-cache-flushing-fallacy.html)
+ 
+ [Herb Sutter discussion on Thread Penalty](https://www.drdobbs.com/parallel/maximize-locality-minimize-contention/208200273) 
   
 ## License  
   
