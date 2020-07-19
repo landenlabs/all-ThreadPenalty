@@ -25,6 +25,8 @@ package com.landenlabs.allThreadPenalty;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -86,6 +88,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     private TextView testProgressPercent;
     private TextView graphTime;
     private String timeStr = "00:00";
+    private SharedPreferences prefs;
 
     // Silly timer
     private long startMilli;
@@ -175,7 +178,7 @@ public class FragBottomNavOne extends FragBottomNavBase
         getWritePermission(getActivity());
 
         // Setup line graph.
-        setupGraph(root);
+        // setupGraph(root);
 
         return root;
     }
@@ -212,13 +215,17 @@ public class FragBottomNavOne extends FragBottomNavBase
             startTestBtn.setChecked(isTestRunning);
         }
         initMenu();
-        lineGraph.restore();
+        // Setup line graph.
+        setupGraph(root);
+        prefs = getContext().getSharedPreferences("LineGraph", Context.MODE_PRIVATE);
+        lineGraph.restore(prefs);
     }
 
     @Override
     public void onPause() {
         fixUI(false);
-        lineGraph.save();
+        lineGraph.save(prefs);
+        lineGraph = null;
         super.onPause();
     }
 

@@ -22,6 +22,8 @@
  */
 package com.landenlabs.allThreadPenalty.penalty;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -37,7 +39,16 @@ import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static com.landenlabs.allThreadPenalty.util.SaveUtil.loadPreferencesBundle;
+import static com.landenlabs.allThreadPenalty.util.SaveUtil.savePreferencesBundle;
 
 /**
  *  Create a line graph to scroll when data is updated.
@@ -49,6 +60,7 @@ public class LineGraph implements LifecycleObserver {
     private GraphView graphView;
 
     public void initGraph(GraphView graph, int maxX) {
+
         this.graphView = graph;
 
         graph.getViewport().setXAxisBoundsManual(true);
@@ -89,6 +101,7 @@ public class LineGraph implements LifecycleObserver {
 
     private static final String ARRAY_X_LEN = "arrayXlen";
     private static final String ARRAY_X_MIN = "arrayXmin";
+    private static final String ARRAY_X_MAX = "arrayXmax";
     private static final String ARRAY_Y_FLT = "arrayYflt";
 
     public void onSave(@NonNull Bundle bundle) {
@@ -97,6 +110,7 @@ public class LineGraph implements LifecycleObserver {
         int lenX = maxX - minX + 1;
         bundle.putInt(ARRAY_X_LEN, lenX);
         bundle.putInt(ARRAY_X_MIN, minX);
+        bundle.putInt(ARRAY_X_MAX, maxX);
         float[] dataYarray = new float[lenX];
         int y = 0;
         Iterator<DataPoint> iter = mSeries.getValues(minX, maxX);
@@ -109,20 +123,29 @@ public class LineGraph implements LifecycleObserver {
     public void onRestore(@NonNull Bundle bundle) {
         int lenX = bundle.getInt(ARRAY_X_LEN);
         int minX = bundle.getInt(ARRAY_X_MIN);
+        int maxX = bundle.getInt(ARRAY_X_MAX);
         float[] dataYarray = bundle.getFloatArray(ARRAY_Y_FLT);
-        DataPoint[] data = new DataPoint[lenX];
-        for (int idx = 0; idx < lenX ; idx++) {
-            data[idx] = new DataPoint(minX++, dataYarray[idx]);
+        if (graphView != null && lenX > 0 && maxX > 0 && dataYarray != null && dataYarray.length == lenX) {
+            graphView.removeAllSeries();
+            initGraph (this.graphView, maxX);
+            for (int idx = 0; idx < lenX ; idx++) {
+                append(idx,  dataYarray[idx]);
+            }
         }
-        mSeries.resetData(data);
     }
 
-    private static Bundle saveRestore = new Bundle();
-    public void save() {
-        saveRestore = new Bundle();
+    private static String saveKey = "lg";
+
+    public void save(SharedPreferences prefs) {
+        Bundle saveRestore = new Bundle();
         onSave(saveRestore);
+        SharedPreferences.Editor editor = prefs.edit();
+        savePreferencesBundle( editor, saveKey, saveRestore);
+        editor.apply();
     }
-    public void restore() {
+    public void restore(SharedPreferences prefs) {
+        Bundle saveRestore = loadPreferencesBundle(prefs, saveKey);
         onRestore(saveRestore);
     }
+
 }

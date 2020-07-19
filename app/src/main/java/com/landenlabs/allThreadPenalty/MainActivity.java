@@ -41,6 +41,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
+import com.landenlabs.allThreadPenalty.util.UncaughtExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,10 +49,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity {
 
-    androidx.appcompat.widget.Toolbar toolbar;
-    NavController navController;
+    private androidx.appcompat.widget.Toolbar toolbar;
+    private NavController navController;
+    private UncaughtExceptionHandler uncaughtExceptionHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        uncaughtExceptionHandler = new UncaughtExceptionHandler(this);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_side, menu);
@@ -119,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         while (navIT.hasNext()) {
             NavDestination navDestination = navIT.next();
             MenuItem menuItem = menus.get(navDestination.getLabel());
-            if (menuItem != null) {
+            if (menuItem != null && navDestination.getLabel() != null) {
                 Intent newTaskIntent = new Intent(this, MainActivity.class);
                 newTaskIntent.setAction(navDestination.getNavigatorName());
                 newTaskIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
