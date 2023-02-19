@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/CMakeLists.txt",
+    "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/ldennis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/ldennis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "cppcode-Debug-x86_64": {
+      "artifactName": "cppcode",
+      "buildCommand": "/Users/ldennis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86_64\" cppcode",
+      "abi": "x86_64",
+      "output": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/build/intermediates/cmake/debug/obj/x86_64/libcppcode.so",
+      "runtimeFiles": []
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <declare-styleable name="TextViewExt1">
+        <!--
+        <attr name="textStyle" format="integer" />
+        <attr name="typeface" format="reference" />
+        <attr name="fontFamily" format="string" />
+        <attr name="underline" format="boolean" />
+        -->
+
+        <attr name="clipBottom" format="dimension" />
+        <attr name="shadowRadius" format="dimension" />
+        <attr name="shadowColor" format="color" />
+        <attr name="markerColor" format="color" />
+        <attr name="marker" format="reference" />
+        <attr name="markerOffset" format="dimension" />
+    </declare-styleable>
+</resources>

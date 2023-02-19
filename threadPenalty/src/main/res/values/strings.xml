@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">all-threadPenalty</string>
+    <string name="bottom_nav_menu_title">Main Page</string>
+    <string name="info_menu_title">About</string>
+    <string name="bottom_nav_title_home">Graph</string>
+    <string name="bottom_nav_title_two">Page2</string>
+
+    <string name="websiteLanDenLabs">http://landenlabs.com</string>
+    <string name="info_text">Sample app showcasing use of C++ with Java. The app demonstrates how to communicate between Java and C++.\n\By using  C++ the app can measure Thread Locality Penalty on Android devices. The penalty is caused by concurrent threads accessing similar or near memory addresses which cause a CPU to flush its cache resulting in slower memory access. You can read more details on this topic on my website \n\nhttps://landenlabs.com/code/locality.html</string>
+    <string name="side_nav_header_1">All Thread Penalty</string>
+    <string name="nav_header_2"></string>
+
+    <!-- Menu -->
+    <string name="setting_menu_one_long">Long Test Cycles</string>
+    <string name="setting_menu_one_short">Short Test Cycles</string>
+    <string name="setting_menu_one_2threads">2 Threads</string>
+    <string name="setting_menu_one_4threads">4 Threads</string>
+    <string name="setting_menu_one_6threads">6 Threads</string>
+    <string name="hr">---</string>
+    <string name="setting_menu_two_1">Settings Menu 1</string>
+    <string name="setting_menu_two_2">Settings Menu 2</string>
+    <string name="setting_menu_two_3">Settings Menu 3</string>
+
+    <!-- Test -->
+    <string name="test_done">Done</string>
+    <string name="test_log_done">%1$s Done</string>
+    <string name="test_log_error">%1$s Error %2$s</string>
+    <string name="test_log_msg">%1$s  %2$s</string>
+    <string name="test_riunning">Running</string>
+    <string name="graph_title">Device - Model - Date</string>
+    <string name="graph_x_title">Memory Access Gap\n[%1$d CPU, %2$s cycles, %3$d threads]</string>
+    <string name="penalty_title">Thread Locality Penalty %1$s</string>
+    <string name="clock1_label">Thread Clock (1 sec):</string>
+    <string name="clock2_label">Thread Clock (2 sec):</string>
+    <string name="penalty_start_test">Start Test</string>
+    <string name="penalty_stop_test">Stop Test</string>
+    <string name="penalty_thread_messages">Thread Messages:</string>
+</resources>

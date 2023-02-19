@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.landenlabs.all_threadPenalty",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 11115,
+      "versionName": "1.11.15",
+      "outputFile": "all-threadPenalty-release-1.11.15.apk"
+    }
+  ],
+  "elementType": "File"
+}

@@ -1,0 +1,43 @@
+[
+{
+  "directory": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86",
+  "command": "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/.  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/cppcode.dir/cppcode.cpp.o -c /Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/cppcode.cpp",
+  "file": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/cppcode.cpp"
+},
+
+{
+  "directory": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86",
+  "command": "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/.  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/cppcode.dir/threadPenalty.cpp.o -c /Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/threadPenalty.cpp",
+  "file": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/threadPenalty.cpp"
+},
+
+{
+  "directory": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86",
+  "command": "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/.  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/cppcode.dir/plog/plog.cpp.o -c /Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plog/plog.cpp",
+  "file": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plog/plog.cpp"
+},
+
+{
+  "directory": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86",
+  "command": "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/.  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/cppcode.dir/plogs/plogs.cpp.o -c /Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogs/plogs.cpp",
+  "file": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogs/plogs.cpp"
+},
+
+{
+  "directory": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86",
+  "command": "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/.  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/cppcode.dir/plogs/plogfile.cpp.o -c /Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogs/plogfile.cpp",
+  "file": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogs/plogfile.cpp"
+},
+
+{
+  "directory": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86",
+  "command": "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/.  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/cppcode.dir/plogJavaBridge.cpp.o -c /Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogJavaBridge.cpp",
+  "file": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogJavaBridge.cpp"
+},
+
+{
+  "directory": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/.cxx/cmake/debug/x86",
+  "command": "/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android23 --gcc-toolchain=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ldennis/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dcppcode_EXPORTS -I/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/.  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/cppcode.dir/plogTester.cpp.o -c /Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogTester.cpp",
+  "file": "/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/src/main/cpp/plogTester.cpp"
+}
+]

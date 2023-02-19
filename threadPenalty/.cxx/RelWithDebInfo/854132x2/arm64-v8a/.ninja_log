@@ -1,0 +1,11 @@
+# ninja log v5
+1	513	1656205894	CMakeFiles/cppcode.dir/plogs/plogs.cpp.o	6404bf4c482130af
+2	526	1656205894	CMakeFiles/cppcode.dir/plogTester.cpp.o	49b57d6debe8dfcb
+2	534	1656205894	CMakeFiles/cppcode.dir/plogJavaBridge.cpp.o	30f35a3e4bada8ac
+2	550	1656205894	CMakeFiles/cppcode.dir/plogs/plogfile.cpp.o	e3cf307a6cfcc01c
+1	553	1656205894	CMakeFiles/cppcode.dir/plog/plog.cpp.o	c282fa6ac8831c39
+0	593	1656205894	CMakeFiles/cppcode.dir/cppcode.cpp.o	e4b3603dd7ba25e2
+1	652	1656205894	CMakeFiles/cppcode.dir/threadPenalty.cpp.o	f2040814d793a0d4
+652	812	1656205894	/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/build/intermediates/cxx/RelWithDebInfo/854132x2/obj/arm64-v8a/libcppcode.so	e76fb690b9eb8b50
+2	594	1656207086	CMakeFiles/cppcode.dir/cppcode.cpp.o	e4b3603dd7ba25e2
+594	800	1656207086	/Users/ldennis/projects/projects-android/_all/all-threadPenalty/threadPenalty/build/intermediates/cxx/RelWithDebInfo/854132x2/obj/arm64-v8a/libcppcode.so	e76fb690b9eb8b50

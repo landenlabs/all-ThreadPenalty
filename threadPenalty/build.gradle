@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            // See all-sensor for correct way to hide and manage sign passwords.
+            storeFile file('/Users/ldennis/Dropbox/android/keystores/all-thread-penalty.jks')
+            storePassword 'Salem2nh-k'
+            keyAlias 'threadPenalty'
+            keyPassword 'Salem2nh-u'
+        }
+    }
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.landenlabs.all_threadPenalty"
+        minSdkVersion 23
+        targetSdkVersion 33
+
+        versionCode 20625
+        versionName '2.06.25'
+
+        // Limit languages to following list.
+        resConfigs "en", "es"
+
+        ndk {
+            // abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            // Enables code shrinking, obfuscation, and optimization.
+            minifyEnabled true
+
+            // List of resources removed at end of generated mapping file:
+            // grep unused ./app/build/outputs/mapping/demoRelease/resources.txt
+            shrinkResources true
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            // Enable verbose lint reporting during build.
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+    
+    // Save app version in string so resource can be used in layouts
+    applicationVariants.all { variant ->
+        variant.resValue "string", "versionName", "v" + variant.versionName
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // implementation 'androidx.annotation:annotation:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+
+    // Line Graph https://github.com/jjoe64/GraphView
+    implementation 'com.jjoe64:graphview:4.2.2'
+}
+
+// Rename app
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        def ourname = project.parent.name
+        outputFileName = "$ourname-${variant.name}-${variant.versionName}.apk"
+        println "out name= $outputFileName"
+    }
+}
