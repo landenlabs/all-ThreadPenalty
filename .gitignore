@@ -6,8 +6,7 @@
 /local.properties
 /.idea
 /.cxx
-/app/.cxx
-app/.cxx
+threadPenalty/.cxx
 /build
 /hide
 /captures

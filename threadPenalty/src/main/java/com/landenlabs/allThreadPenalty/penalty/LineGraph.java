@@ -22,7 +22,9 @@
  */
 package com.landenlabs.allThreadPenalty.penalty;
 
-import android.content.Context;
+import static com.landenlabs.allThreadPenalty.util.SaveUtil.loadPreferencesBundle;
+import static com.landenlabs.allThreadPenalty.util.SaveUtil.savePreferencesBundle;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,22 +35,11 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.LabelFormatter;
 import com.jjoe64.graphview.Viewport;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static com.landenlabs.allThreadPenalty.util.SaveUtil.loadPreferencesBundle;
-import static com.landenlabs.allThreadPenalty.util.SaveUtil.savePreferencesBundle;
 
 /**
  *  Create a line graph to scroll when data is updated.

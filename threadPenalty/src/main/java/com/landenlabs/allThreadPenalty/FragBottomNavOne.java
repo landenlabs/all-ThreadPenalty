@@ -23,6 +23,15 @@
 package com.landenlabs.allThreadPenalty;
 
 
+import static com.landenlabs.allThreadPenalty.log.PLog.PLOG_ERROR;
+import static com.landenlabs.allThreadPenalty.log.PLog.PLOG_INFO;
+import static com.landenlabs.allThreadPenalty.log.PLogs.PLOGS_DEBUG;
+import static com.landenlabs.allThreadPenalty.log.PLogs.PLOGS_INFO;
+import static com.landenlabs.allThreadPenalty.log.PLogs.PLOGS_WARN;
+import static com.landenlabs.allThreadPenalty.penalty.LineGraph.GAP_END;
+import static com.landenlabs.allThreadPenalty.penalty.LineGraph.GAP_LENGTH;
+import static com.landenlabs.allThreadPenalty.penalty.LineGraph.GAP_STEP;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -33,6 +42,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -67,15 +77,6 @@ import com.landenlabs.allThreadPenalty.util.ShareUtil;
 import java.util.Locale;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
-
-import static com.landenlabs.allThreadPenalty.log.PLog.PLOG_ERROR;
-import static com.landenlabs.allThreadPenalty.log.PLog.PLOG_INFO;
-import static com.landenlabs.allThreadPenalty.log.PLogs.PLOGS_DEBUG;
-import static com.landenlabs.allThreadPenalty.log.PLogs.PLOGS_INFO;
-import static com.landenlabs.allThreadPenalty.log.PLogs.PLOGS_WARN;
-import static com.landenlabs.allThreadPenalty.penalty.LineGraph.GAP_END;
-import static com.landenlabs.allThreadPenalty.penalty.LineGraph.GAP_LENGTH;
-import static com.landenlabs.allThreadPenalty.penalty.LineGraph.GAP_STEP;
 
 /**
  * Measure Thread Locality Penalty (accessing similar memory by concurrent threads)
@@ -222,7 +223,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     public void onResume() {
         super.onResume();
         if (uiHandler == null) {
-            uiHandler = new Handler(this);
+            uiHandler = new Handler(Looper.getMainLooper(), this);
         }
         JniHandler.shareMsg = this;
         fixUI(true);
