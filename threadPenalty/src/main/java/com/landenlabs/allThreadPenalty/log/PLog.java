@@ -29,9 +29,9 @@ public class PLog {
 
     // Keep in sync with PLOG_LEVELS enum
     public static int PLOG_DEBUG = 3;
-    public static int PLOG_INFO = 4;
+    public static final int PLOG_INFO = 4;
     public static int PLOG_WARN = 5;
-    public static int PLOG_ERROR = 6;
+    public static final int PLOG_ERROR = 6;
     public static int PLOG_FATAL = 7;
     public static int PLOG_SILENT = 8;
 

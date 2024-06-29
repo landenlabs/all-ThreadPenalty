@@ -40,6 +40,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.landenlabs.allThreadPenalty.R;
 
@@ -92,7 +93,7 @@ public class TextViewExt1 extends TextView {
     private int bgHeightPx = 0;
     private int shadowSizePx = 20;
 
-    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Matrix mMatrix = new Matrix();
     private float xOffsetPx = Float.NaN;
 
@@ -200,7 +201,7 @@ public class TextViewExt1 extends TextView {
     public void init() {
         try {
             if (marker != -1) {
-                markerDrawable = getResources().getDrawable(marker, getContext().getTheme());
+                markerDrawable = ResourcesCompat.getDrawable(getResources(), marker, getContext().getTheme());
             }  else {
                 // Grab background as marker
                 markerDrawable = getBackground();

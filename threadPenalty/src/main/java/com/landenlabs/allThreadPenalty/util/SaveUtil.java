@@ -50,7 +50,7 @@ public class SaveUtil {
             } else if (o instanceof Boolean) {
                 editor.putBoolean(itemKey, (Boolean) o);
             } else if (o instanceof CharSequence) {
-                editor.putString(itemKey, ((CharSequence) o).toString());
+                editor.putString(itemKey, o.toString());
             } else if (o instanceof Bundle) {
                 savePreferencesBundle(editor, itemKey, ((Bundle) o));
             } else if (o instanceof float[]) {
@@ -83,7 +83,7 @@ public class SaveUtil {
         Collections.sort(sortedList);
         Iterator<String> it = sortedList.iterator();
         String prefKeyPrefix = key + SAVED_PREFS_BUNDLE_KEY_SEPARATOR;
-        Set<String> subBundleKeys = new HashSet<String>();
+        Set<String> subBundleKeys = new HashSet<>();
         while (it.hasNext()) {
 
             String prefKey = it.next();
@@ -121,7 +121,7 @@ public class SaveUtil {
                     } else if (o instanceof Boolean) {
                         bundle.putBoolean(bundleKey, (Boolean) o);
                     } else if (o instanceof CharSequence) {
-                        bundle.putString(bundleKey, ((CharSequence) o).toString());
+                        bundle.putString(bundleKey, o.toString());
                     }
                 } else {
                     // Key is for a sub bundle

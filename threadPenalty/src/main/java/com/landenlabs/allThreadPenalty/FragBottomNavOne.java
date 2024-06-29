@@ -126,7 +126,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     // Thread event messages
     //  Text Message
     static class MsgEvent extends Events.QueueEvent {
-        String msg;
+        final String msg;
         MsgEvent(String msg) {
             this.eventType = Events.EventType.MSG;
             this.msg = msg;
@@ -139,10 +139,10 @@ public class FragBottomNavOne extends FragBottomNavBase
     }
     //  Data message
     static class DataEvent extends Events.QueueEvent {
-        int startGap;
-        int endGap;
-        int stepGap;
-        long[] gapMilliseconds = new long[GAP_END + 1];
+        final int startGap;
+        final int endGap;
+        final int stepGap;
+        final long[] gapMilliseconds = new long[GAP_END + 1];
 
         DataEvent(int startGap) {
             this.eventType = Events.EventType.DATA;

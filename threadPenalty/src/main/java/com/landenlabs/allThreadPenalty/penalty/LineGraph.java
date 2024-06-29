@@ -130,7 +130,7 @@ public class LineGraph implements LifecycleObserver {
         }
     }
 
-    private static String saveKey = "lg";
+    private static final String saveKey = "lg";
 
     public void save(SharedPreferences prefs) {
         Bundle saveRestore = new Bundle();

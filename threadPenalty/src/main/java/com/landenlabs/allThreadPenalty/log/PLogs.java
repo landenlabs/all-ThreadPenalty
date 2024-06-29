@@ -28,9 +28,9 @@ package com.landenlabs.allThreadPenalty.log;
 public class PLogs {
 
     // Keep in sync with PLOG_LEVELS enum
-    public static int PLOGS_DEBUG = 3;
-    public static int PLOGS_INFO = 4;
-    public static int PLOGS_WARN = 5;
+    public static final int PLOGS_DEBUG = 3;
+    public static final int PLOGS_INFO = 4;
+    public static final int PLOGS_WARN = 5;
     public static int PLOGS_ERROR = 6;
     public static int PLOGS_FATAL = 7;
     public static int PLOGS_SILENT = 8;

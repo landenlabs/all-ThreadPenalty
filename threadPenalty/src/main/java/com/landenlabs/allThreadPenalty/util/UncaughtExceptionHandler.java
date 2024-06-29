@@ -35,6 +35,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.landenlabs.allThreadPenalty.R;
 
 import java.io.PrintWriter;
@@ -54,7 +56,7 @@ public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
     private final SharedPreferences prefs;
     private static final String CRASH_REPORT = "CrashReport";
 
-    private Thread.UncaughtExceptionHandler originalHandler;
+    private final Thread.UncaughtExceptionHandler originalHandler;
 
     /**
      * Creates a reporter instance
@@ -80,7 +82,7 @@ public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
     }
 
     @Override
-    public void uncaughtException(Thread thread, Throwable ex) {
+    public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
 
         String stackTrace = Log.getStackTraceString(ex);
         Log.e("AllThreadPenalty",  "Exception", ex);
@@ -129,38 +131,36 @@ public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
     private void showCrashDialog(final String msg) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            builder.setView(R.layout.crash_dlg);
-            AlertDialog dialog = builder.show();
+        builder.setView(R.layout.crash_dlg);
+        AlertDialog dialog = builder.show();
 
-            ((TextView)dialog.findViewById(R.id.crash_text)).setText(msg);
+        ((TextView)dialog.findViewById(R.id.crash_text)).setText(msg);
 
-            dialog.findViewById(R.id.crash_cont_btn).setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            System.exit(0);
-                        }
+        dialog.findViewById(R.id.crash_cont_btn).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.exit(0);
                     }
-            );
+                }
+        );
 
-            dialog.findViewById(R.id.crash_email_btn).setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                            StringBuilder body = new StringBuilder("Trace\n\n")
-                                    .append(msg);
-                            sendIntent.setType("message/rfc822");
-                            sendIntent.putExtra(Intent.EXTRA_TEXT, body.toString());
-                            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Crash report");
-                            sendIntent.setType("message/rfc822");
-                            context.startActivity(sendIntent);
-                            System.exit(0);
-                        }
+        dialog.findViewById(R.id.crash_email_btn).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        StringBuilder body = new StringBuilder("Trace\n\n")
+                                .append(msg);
+                        sendIntent.setType("message/rfc822");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, body.toString());
+                        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Crash report");
+                        sendIntent.setType("message/rfc822");
+                        context.startActivity(sendIntent);
+                        System.exit(0);
                     }
-            );
-        }
+                }
+        );
 
         Looper.loop();
     }

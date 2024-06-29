@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+plugins {
+    id ("com.android.application")
+    // Prevents duplicate kotlin warnings
+    id ("org.jetbrains.kotlin.android")
+}
 
 android {
     signingConfigs {
@@ -14,11 +18,11 @@ android {
 
     defaultConfig {
         applicationId "com.landenlabs.all_threadPenalty"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 34
 
-        versionCode 21110
-        versionName '2.11.10'
+        versionCode 30627
+        versionName '3.06.27'
         resourceConfigurations += ['en', 'es']
 
         // Limit languages to following list.
@@ -67,12 +71,12 @@ android {
 
 dependencies {
     // implementation 'androidx.annotation:annotation:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'androidx.navigation:navigation-fragment:2.7.4'
-    implementation 'androidx.navigation:navigation-ui:2.7.4'
+    implementation 'androidx.navigation:navigation-fragment:2.7.7'
+    implementation 'androidx.navigation:navigation-ui:2.7.7'
 
     // Line Graph https://github.com/jjoe64/GraphView
     implementation 'com.jjoe64:graphview:4.2.2'
@@ -83,8 +87,8 @@ dependencies {
 //  Ex:
 //           app-release.apk -> threadpenalty -release-1.02.3456.apk
 //           app-release.aab -> threadpenalty -release-1.4.27.aab
-android.applicationVariants.all {
-    variant -> variant.outputs.all {
+android.applicationVariants.configureEach {
+    variant -> variant.outputs.configureEach {
         def ourname = project.parent.name
         def buildType = outputFileName.replaceAll(".*(debug|release).*", '$1')
         def versionStr = versionName.replaceAll("-.*", "")
@@ -121,7 +125,7 @@ tasks.register('listFlavors') {
     }
 }
 
-task listrepos {
+tasks.register('listrepos') {
     description = 'List threadpenalty repositories'
     doLast {
         println "threadpenalty Repositories:"

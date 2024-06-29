@@ -24,6 +24,7 @@ package com.landenlabs.allThreadPenalty;
 
 import static com.landenlabs.allThreadPenalty.util.SysUtil.getNavController;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
@@ -73,16 +74,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up navigation menu
         NavigationView navigationView = findViewById(R.id.navigationView);
+        @SuppressLint("RestrictedApi")
         NavigationMenuView navMenuView = (NavigationMenuView) navigationView.getChildAt(0);
         navMenuView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.post(new Runnable() {
-            @Override
-            public void run() {
-                BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-                addShortcut(bottomNavigationView);
-            }
+        navigationView.post(() -> {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+            addShortcut(bottomNavigationView);
         });
 
 
@@ -115,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String action1= "action1";
     private void addShortcut( BottomNavigationView bottomNavigationView) {
-        if (android.os.Build.VERSION.SDK_INT <android.os.Build.VERSION_CODES.N_MR1)
-            return;
 
         int menuSize = bottomNavigationView.getMenu().size();
         Map<String, MenuItem> menus = new HashMap<>(menuSize);
