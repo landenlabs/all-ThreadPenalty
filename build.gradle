@@ -23,10 +23,3 @@ allprojects {
         mavenCentral()
     }
 }
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-    // delete "${buildDir}/someFile"
-    println "Delete ${projectDir}/app/.cxx"
-    delete "${projectDir}/app/.cxx"
-}

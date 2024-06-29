@@ -17,7 +17,7 @@
  *  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  @author Dennis Lang  (Jan-2020)
- *  @see http://landenlabs.com
+ *  @see https://landenlabs.com
  *
  */
 
@@ -45,7 +45,7 @@ typedef void *Thread_return_t;
 // Concurrent access and modification within a Process/Core cache may get invalidated and flushed
 // causing delay to fetch the updated memory prior to allowing subsequent access.
 //
-// http://landenlabs.com/code/locality.html
+// https://landenlabs.com/code/locality.html
 // https://www.drdobbs.com/parallel/maximize-locality-minimize-contention/208200273
 // https://mechanical-sympathy.blogspot.com/2013/02/cpu-cache-flushing-fallacy.html
 //

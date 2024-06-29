@@ -17,7 +17,7 @@
  *  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  @author Dennis Lang  (Jan-2020)
- *  @see http://landenlabs.com
+ *  @see https://landenlabs.com
  *
  */
 #pragma once

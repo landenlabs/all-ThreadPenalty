@@ -1,20 +1,12 @@
+// ThreadPenalty app module build.gradle
 plugins {
     id ("com.android.application")
-    // Prevents duplicate kotlin warnings
-    id ("org.jetbrains.kotlin.android")
+    id ("org.jetbrains.kotlin.android")     // Prevents duplicate kotlin warnings
 }
 
 android {
-    signingConfigs {
-        release {
-            // See all-sensor for correct way to hide and manage sign passwords.
-            storeFile file('/Users/ldennis/Dropbox/android/keystores/all-thread-penalty.jks')
-            storePassword 'Salem2nh-k'
-            keyAlias 'threadPenalty'
-            keyPassword 'Salem2nh-u'
-        }
-    }
-    compileSdkVersion 34
+    compileSdk 34
+    namespace 'com.landenlabs.allThreadPenalty'
 
     defaultConfig {
         applicationId "com.landenlabs.all_threadPenalty"
@@ -33,6 +25,31 @@ android {
         }
     }
 
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile).tap {
+            configureEach {
+                // Enable verbose lint reporting during build.
+                options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            }
+        }
+    }
+
+    signingConfigs {
+        release  // populated below
+    }
+
+    // Load signing config (does not work for command line builds)
+    // println("Setting release=${rootDir}/release.properties")
+    if (file("${rootDir}/release.properties").exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(file("${rootDir}/release.properties")))
+        android.signingConfigs.release.storeFile = file(props.keyStore)
+        android.signingConfigs.release.storePassword = props.keyStorePassword
+        android.signingConfigs.release.keyAlias = props.keyAlias
+        android.signingConfigs.release.keyPassword = props.keyAliasPassword
+        println("Setting release to " + signingConfigs.release.storeFile.absolutePath )
+    }
+
     buildTypes {
         release {
             // Enables code shrinking, obfuscation, and optimization.
@@ -47,15 +64,6 @@ android {
         }
     }
 
-    gradle.projectsEvaluated {
-        tasks.withType(JavaCompile).tap {
-            configureEach {
-                // Enable verbose lint reporting during build.
-                options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-            }
-        }
-    }
-    
     // Save app version in string so resource can be used in layouts
     applicationVariants.configureEach { variant ->
         variant.resValue "string", "versionName", "v" + variant.versionName
@@ -66,7 +74,6 @@ android {
             path "src/main/cpp/CMakeLists.txt"
         }
     }
-    namespace 'com.landenlabs.allThreadPenalty'
 }
 
 dependencies {
@@ -130,5 +137,17 @@ tasks.register('listrepos') {
     doLast {
         println "threadpenalty Repositories:"
         project.repositories.each { printf("  %15s %s\n", it.name, it.url) }
+    }
+}
+
+tasks.register('deepClean' /*, Delete */) {
+    description = 'Delete c++ temp files'
+    doLast {
+        println "Delete ${layout.buildDirectory.get()}"
+        delete layout.buildDirectory.get()
+        // delete rootProject.buildDir
+        // delete "${buildDir}/someFile"
+        println "Delete ${projectDir}/.cxx"
+        delete "${projectDir}/.cxx"
     }
 }
