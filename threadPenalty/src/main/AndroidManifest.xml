@@ -24,7 +24,7 @@
             android:configChanges="orientation|screenSize"
          -->
         <activity
-            android:name="com.landenlabs.allThreadPenalty.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">

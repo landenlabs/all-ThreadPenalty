@@ -16,4 +16,17 @@
         android:name="com.landenlabs.allThreadPenalty.AboutFragment"
         android:label="About"
         tools:layout="@layout/frag_about" />
+
+    <fragment
+        android:label="Graph"
+        android:id="@+id/bottomNavFragmentOne"
+        android:name="com.landenlabs.allThreadPenalty.FragBottomNavOne"
+        tools:layout="@layout/frag_bottom_nav_one"/>
+
+    <fragment
+        android:label="Page2"
+        android:id="@+id/bottomNavFragmentTwo"
+        android:name="com.landenlabs.allThreadPenalty.FragBottomNavTwo"
+        tools:layout="@layout/frag_bottom_nav_two"/>
+
 </navigation>

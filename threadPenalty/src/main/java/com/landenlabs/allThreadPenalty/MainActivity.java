@@ -76,14 +76,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.navigationView);
         @SuppressLint("RestrictedApi")
         NavigationMenuView navMenuView = (NavigationMenuView) navigationView.getChildAt(0);
-        navMenuView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
+        navMenuView.addItemDecoration(new DividerItemDecoration(MainActivity.this, DividerItemDecoration.VERTICAL));
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.post(() -> {
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
             addShortcut(bottomNavigationView);
         });
-
 
         String action = getIntent() != null ? getIntent().getAction() : null;
         if (action1.equals(action)) {

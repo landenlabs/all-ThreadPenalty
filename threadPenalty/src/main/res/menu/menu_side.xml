@@ -6,4 +6,5 @@
     <item
         android:id="@+id/infoFragment"
         android:title="@string/info_menu_title"/>
+
 </menu>

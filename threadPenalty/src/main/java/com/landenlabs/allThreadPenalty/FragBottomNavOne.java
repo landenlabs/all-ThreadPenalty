@@ -62,6 +62,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuCompat;
+import androidx.core.view.MenuProvider;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -83,7 +84,7 @@ import java.util.concurrent.TimeUnit;
  */
 @SuppressWarnings("RedundantSuppression")
 public class FragBottomNavOne extends FragBottomNavBase
-        implements View.OnClickListener, JniHandler.ShareMsg, Handler.Callback {
+        implements View.OnClickListener, JniHandler.ShareMsg, Handler.Callback, MenuProvider {
 
     private Menu optionsMenu;
     private ToggleButton startTestBtn;
@@ -168,7 +169,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, R.layout.frag_bottom_nav_one);
-        this.setHasOptionsMenu(true);   // See onCreateOptionsMenu
+        requireActivity().addMenuProvider(this); // this.setHasOptionsMenu(true);
         setBarTitle("Thread Locality Penalty");
 
         PLog.setMinLevel(PLOG_INFO);
@@ -272,10 +273,10 @@ public class FragBottomNavOne extends FragBottomNavBase
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
         menu.clear();   // Remove other items for now.
         MenuCompat.setGroupDividerEnabled(menu, true);
-        inflater.inflate(R.menu.menu_settings_one, menu);
+        menuInflater.inflate(R.menu.menu_settings_one, menu);
         optionsMenu = menu;
         optionsMenu.findItem(R.id.setting_menu_one_long).setChecked(doLongTestCycles);
         doCycleMenuId = doLongTestCycles ? R.id.setting_menu_one_long : R.id.setting_menu_one_short;
@@ -297,28 +298,34 @@ public class FragBottomNavOne extends FragBottomNavBase
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        boolean handledIt = false;
         if (id == R.id.setting_menu_one_short) {
             doLongTestCycles = false;
             doCycleMenuId = id;
+            handledIt = true;
         } else if (id == R.id.setting_menu_one_long) {
             doLongTestCycles = true;
             doCycleMenuId = id;
+            handledIt = true;
         } else if (id == R.id.setting_menu_one_2threads) {
             numThreads = 2;
             threadMenuId = id;
+            handledIt = true;
         } else if (id == R.id.setting_menu_one_4threads) {
             numThreads = 4;
             threadMenuId = id;
+            handledIt = true;
         } else if (id == R.id.setting_menu_one_6threads) {
             numThreads = 6;
             threadMenuId = id;
+            handledIt = true;
         }
 
         initMenu();
         setupGraph(root);
-        return super.onOptionsItemSelected(item);
+        return handledIt;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -622,13 +629,11 @@ public class FragBottomNavOne extends FragBottomNavBase
         }
 
         @SuppressWarnings("unused")
-        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         public void onDestroy() {
             interrupt();
         }
 
         @SuppressWarnings("unused")
-        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
         public void onStop() {
             interrupt();
         }

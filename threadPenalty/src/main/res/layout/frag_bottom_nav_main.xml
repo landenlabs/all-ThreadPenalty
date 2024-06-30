@@ -8,7 +8,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragBottomNavMain">
 
-    <!-- <fragment -->
     <androidx.fragment.app.FragmentContainerView
        android:layout_above="@+id/bottomNavigation"
        android:id="@+id/bottomNavFragment"

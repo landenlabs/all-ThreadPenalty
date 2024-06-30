@@ -13,16 +13,18 @@ android {
         minSdkVersion 26
         targetSdkVersion 34
 
-        versionCode 30627
-        versionName '3.06.27'
-        resourceConfigurations += ['en', 'es']
+        versionCode 30630
+        versionName '3.06.30'
 
         // Limit languages to following list.
+        resourceConfigurations += ['en', 'es']
 
-        ndk {
-            // abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-            abiFilters 'armeabi-v7a', 'arm64-v8a'
-        }
+        buildConfigField "long", "BuildTimeMilli", System.currentTimeMillis() + "L"
+    }
+
+    // Save app version in string so resource can be used in layouts
+    applicationVariants.configureEach { variant ->
+        variant.resValue "string", "versionName", "v" + variant.versionName
     }
 
     gradle.projectsEvaluated {
@@ -61,6 +63,12 @@ android {
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+
+            // Limit languages to following list.
+            ndk {
+                // abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
         }
     }
 
@@ -80,7 +88,7 @@ dependencies {
     // implementation 'androidx.annotation:annotation:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'androidx.navigation:navigation-fragment:2.7.7'
     implementation 'androidx.navigation:navigation-ui:2.7.7'
@@ -92,8 +100,8 @@ dependencies {
 // Rename app
 //  {project}-{flavor}-{buildType}.apk -> {parentProject}-{versionNameSuffix}-{buildType}-{versionStr}.apk
 //  Ex:
-//           app-release.apk -> threadpenalty -release-1.02.3456.apk
-//           app-release.aab -> threadpenalty -release-1.4.27.aab
+//           app-release.apk -> threadpenalty-release-1.02.3456.apk
+//           app-release.aab -> threadpenalty-release-1.4.27.aab
 android.applicationVariants.configureEach {
     variant -> variant.outputs.configureEach {
         def ourname = project.parent.name

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- see   MenuCompat.setGroupDividerEnabled(menu, true); to enable separator -->
-    <group android:id="@+id/page_one" >
+    <!-- <group android:id="@+id/page_one" > -->
         <group android:checkableBehavior="single" >
             <item
                 android:checkable="true"
@@ -37,5 +37,5 @@
                 android:id="@+id/setting_menu_one_6threads"
                 android:title="@string/setting_menu_one_6threads" />
         </group>
-    </group>
+   <!--  </group> -->
 </menu>

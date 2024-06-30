@@ -1,0 +1,4 @@
+/Users/dennislang/Library/Android/sdk/cmake/3.22.1/bin/ninja \
+  -C \
+  /Users/dennislang/opt/projects/projects-android/_all/all-ThreadPenalty/threadPenalty/.cxx/Debug/4b3d713p/arm64-v8a \
+  cppcode
