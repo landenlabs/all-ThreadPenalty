@@ -8,6 +8,8 @@
 /.cxx
 threadPenalty/.cxx
 /build
+build/
+**/build/
 /hide
 /captures
 /app/build
