@@ -5,16 +5,16 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
     namespace 'com.landenlabs.allThreadPenalty'
 
     defaultConfig {
         applicationId "com.landenlabs.all_threadPenalty"
         minSdkVersion 26
-        targetSdkVersion 34
+        targetSdkVersion 35
 
-        versionCode 30630
-        versionName '3.06.30'
+        versionCode 30701
+        versionName '3.07.01'
 
         // Limit languages to following list.
         resourceConfigurations += ['en', 'es']
@@ -90,8 +90,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.12.0'
     //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'androidx.navigation:navigation-fragment:2.7.7'
-    implementation 'androidx.navigation:navigation-ui:2.7.7'
+    implementation 'androidx.navigation:navigation-fragment:2.8.9'
+    implementation 'androidx.navigation:navigation-ui:2.8.9'
 
     // Line Graph https://github.com/jjoe64/GraphView
     implementation 'com.jjoe64:graphview:4.2.2'
