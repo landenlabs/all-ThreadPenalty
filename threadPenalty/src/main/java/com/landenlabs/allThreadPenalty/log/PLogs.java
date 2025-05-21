@@ -17,7 +17,7 @@
  *  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  @author Dennis Lang  (Jan-2020)
- *  @see https://landenlabs.com
+ *  @see https://LanDenLabs.com
  *
  */
 package com.landenlabs.allThreadPenalty.log;

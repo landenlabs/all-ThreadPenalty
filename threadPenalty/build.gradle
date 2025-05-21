@@ -52,6 +52,8 @@ android {
         println("Setting release to " + signingConfigs.release.storeFile.absolutePath )
     }
 
+    buildFeatures.buildConfig = true
+
     buildTypes {
         release {
             // Enables code shrinking, obfuscation, and optimization.
@@ -90,8 +92,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.12.0'
     //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'androidx.navigation:navigation-fragment:2.8.9'
-    implementation 'androidx.navigation:navigation-ui:2.8.9'
+    implementation 'androidx.navigation:navigation-fragment:2.9.0'
+    implementation 'androidx.navigation:navigation-ui:2.9.0'
 
     // Line Graph https://github.com/jjoe64/GraphView
     implementation 'com.jjoe64:graphview:4.2.2'

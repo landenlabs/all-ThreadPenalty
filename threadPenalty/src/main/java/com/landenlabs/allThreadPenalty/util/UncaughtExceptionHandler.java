@@ -17,7 +17,7 @@
  *  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  @author Dennis Lang  (Jan-2020)
- *  @see https://landenlabs.com
+ *  @see https://LanDenLabs.com
  *
  */
 package com.landenlabs.allThreadPenalty.util;
@@ -47,7 +47,7 @@ import java.io.Writer;
  * Save crash report and show it on next run of app.
  *
  * @author Dennis Lang (LanDen Labs)
- * @see <a href="https://landenlabs.com/android"> author's web-site </a>
+ * @see <a href="https://LanDenLabs.com/android"> author's web-site </a>
  */
 @SuppressWarnings({"Convert2Lambda", "StringBufferReplaceableByString"})
 public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {

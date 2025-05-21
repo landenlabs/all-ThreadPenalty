@@ -1,6 +1,5 @@
 *.iml
 *.zip
-*.txt
 *.xcf
 .gradle
 /local.properties
