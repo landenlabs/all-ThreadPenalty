@@ -19,6 +19,8 @@ target_link_libraries(cppcode
         android
         log)
 
+target_link_options(cppcode PRIVATE "-Wl,-z,max-page-size=16384")
+
 # NOTE(oleksii)
 #   The line below contains the proper way of specifying the version of the C++ standard.
 #   Unfortunately, that's not supported by the CMake distribution, shipped with Android SDK.
