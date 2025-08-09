@@ -19,6 +19,7 @@ target_link_libraries(cppcode
         android
         log)
 
+## NDK version 26 and lower, 16KB page size
 target_link_options(cppcode PRIVATE "-Wl,-z,max-page-size=16384")
 
 # NOTE(oleksii)
