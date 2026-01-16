@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk 36
+    compileSdkVersion 36
     namespace 'com.landenlabs.allThreadPenalty'
 
     defaultConfig {
