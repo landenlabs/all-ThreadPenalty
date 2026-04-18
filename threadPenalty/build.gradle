@@ -1,20 +1,22 @@
 // ThreadPenalty app module build.gradle
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")     // Prevents duplicate kotlin warnings
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    compileSdkVersion 36
+    compileSdk 36
     namespace 'com.landenlabs.allThreadPenalty'
 
     defaultConfig {
         applicationId "com.landenlabs.all_threadPenalty"
-        minSdkVersion 26
-        targetSdkVersion 36
+        minSdk 26
+        targetSdk 36
 
         versionCode 30731
         versionName '3.07.31'
+        // Restore the versionName resource for layouts
+        resValue "string", "versionName", "v" + versionName
 
         // Limit languages to following list.
         resourceConfigurations += ['en', 'es']
@@ -22,9 +24,13 @@ android {
         buildConfigField "long", "BuildTimeMilli", System.currentTimeMillis() + "L"
     }
 
-    // Save app version in string so resource can be used in layouts
-    applicationVariants.configureEach { variant ->
-        variant.resValue "string", "versionName", "v" + variant.versionName
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
     }
 
     gradle.projectsEvaluated {
@@ -52,7 +58,10 @@ android {
         println("Setting release to " + signingConfigs.release.storeFile.absolutePath )
     }
 
-    buildFeatures.buildConfig = true
+    buildFeatures {
+        buildConfig = true
+        resValues = true
+    }
 
     buildTypes {
         release {
@@ -63,7 +72,7 @@ android {
             // grep unused ./app/build/outputs/mapping/demoRelease/resources.txt
             shrinkResources true
 
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
 
             // Limit languages to following list.
@@ -74,27 +83,20 @@ android {
         }
     }
 
-    // Save app version in string so resource can be used in layouts
-    applicationVariants.configureEach { variant ->
-        variant.resValue "string", "versionName", "v" + variant.versionName
-    }
-
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
-            // ndkVersion "27.2.12479018"
         }
     }
+    ndkVersion "27.2.12479018"
 }
 
-dependencies {
-    // implementation 'androidx.annotation:annotation:1.5.0'
+    dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.12.0'
-    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.13.0'
 
-    implementation 'androidx.navigation:navigation-fragment:2.9.3'
-    implementation 'androidx.navigation:navigation-ui:2.9.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.9.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.9.7'
 
     // Line Graph https://github.com/jjoe64/GraphView
     implementation 'com.jjoe64:graphview:4.2.2'
