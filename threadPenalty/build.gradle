@@ -13,8 +13,8 @@ android {
         minSdk 26
         targetSdk 36
 
-        versionCode 30731
-        versionName '3.07.31'
+        versionCode = 60419
+        versionName = '6.04.19'
         // Restore the versionName resource for layouts
         resValue "string", "versionName", "v" + versionName
 
