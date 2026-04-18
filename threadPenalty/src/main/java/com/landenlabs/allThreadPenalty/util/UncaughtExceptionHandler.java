@@ -103,7 +103,7 @@ public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
             report.append("Thread:")
                     .append(thread.getName())
                     .append("@")
-                    .append(thread.getId())
+                    .append(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE ? thread.threadId() : thread.getId())
                     .append("\n");
             report.append("Exception:\n")
                     .append(ex.getMessage())

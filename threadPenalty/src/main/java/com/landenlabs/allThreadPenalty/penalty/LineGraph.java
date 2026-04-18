@@ -28,11 +28,11 @@ import static com.landenlabs.allThreadPenalty.util.SaveUtil.savePreferencesBundl
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.Viewport;
@@ -45,8 +45,8 @@ import java.util.Iterator;
  *  Create a line graph to scroll when data is updated.
  *  https://github.com/jjoe64/GraphView
  */
-public class LineGraph implements LifecycleObserver {
-    private final Handler mHandler = new Handler();
+public class LineGraph implements DefaultLifecycleObserver {
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private LineGraphSeries<DataPoint> mSeries;
     private GraphView graphView;
 
@@ -86,12 +86,12 @@ public class LineGraph implements LifecycleObserver {
         graphView.getViewport().setMinX(0);
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    void onResume() {
+    @Override
+    public void onResume(@NonNull LifecycleOwner owner) {
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    void onPause() {
+    @Override
+    public void onPause(@NonNull LifecycleOwner owner) {
     }
 
     private static final String ARRAY_X_LEN = "arrayXlen";

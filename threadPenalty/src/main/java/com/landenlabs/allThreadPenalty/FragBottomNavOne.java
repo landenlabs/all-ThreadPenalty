@@ -56,6 +56,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -158,6 +160,17 @@ public class FragBottomNavOne extends FragBottomNavBase
     private static final int MORE_TEST_DATA = 123;
     private Handler uiHandler;
 
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // Got permission - all is good
+                    PLog.printf(PLOG_INFO, "AllThreadPenalty", "Got write permission");
+                } else {
+                    // Failed to get permission - we are in trouble
+                    PLog.printf(PLOG_ERROR, "AllThreadPenalty", "Failed to get write permission");
+                }
+            });
+
     @Override
     public void message(String msg) {
         dataQueue.add(new MsgEvent(msg));
@@ -169,7 +182,7 @@ public class FragBottomNavOne extends FragBottomNavBase
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, R.layout.frag_bottom_nav_one);
-        requireActivity().addMenuProvider(this); // this.setHasOptionsMenu(true);
+        requireActivity().addMenuProvider(this, getViewLifecycleOwner());
         setBarTitle("Thread Locality Penalty");
 
         PLog.setMinLevel(PLOG_INFO);
@@ -195,7 +208,7 @@ public class FragBottomNavOne extends FragBottomNavBase
         menuHint.animate().alpha(0f).setDuration(4000).start();
 
         // Get write permission for file log.
-        getWritePermission(getActivity());
+        getWritePermission();
 
         // Setup line graph.
         // setupGraph(root);
@@ -278,19 +291,25 @@ public class FragBottomNavOne extends FragBottomNavBase
         MenuCompat.setGroupDividerEnabled(menu, true);
         menuInflater.inflate(R.menu.menu_settings_one, menu);
         optionsMenu = menu;
-        optionsMenu.findItem(R.id.setting_menu_one_long).setChecked(doLongTestCycles);
+        MenuItem longItem = optionsMenu.findItem(R.id.setting_menu_one_long);
+        if (longItem != null) {
+            longItem.setChecked(doLongTestCycles);
+        }
         doCycleMenuId = doLongTestCycles ? R.id.setting_menu_one_long : R.id.setting_menu_one_short;
         switch (numThreads) {
             case 2:
-                optionsMenu.findItem(R.id.setting_menu_one_2threads).setChecked(true);
+                MenuItem item2 = optionsMenu.findItem(R.id.setting_menu_one_2threads);
+                if (item2 != null) item2.setChecked(true);
                 threadMenuId = R.id.setting_menu_one_2threads;
                 break;
             case 4:
-                optionsMenu.findItem(R.id.setting_menu_one_4threads).setChecked(true);
+                MenuItem item4 = optionsMenu.findItem(R.id.setting_menu_one_4threads);
+                if (item4 != null) item4.setChecked(true);
                 threadMenuId = R.id.setting_menu_one_4threads;
                 break;
             case 6:
-                optionsMenu.findItem(R.id.setting_menu_one_6threads).setChecked(true);
+                MenuItem item6 = optionsMenu.findItem(R.id.setting_menu_one_6threads);
+                if (item6 != null) item6.setChecked(true);
                 threadMenuId = R.id.setting_menu_one_6threads;
                 break;
         }
@@ -524,34 +543,16 @@ public class FragBottomNavOne extends FragBottomNavBase
         });
     }
 
-    // ---------------------------------------------------------------------------------------------
     // Permission - check and/or request
 
-    private static final int REQUEST_WRITE_CODE = 12345;
-
-    private boolean canWrite(Activity activity) {
+    private boolean canWrite(Context context) {
         return ContextCompat.checkSelfPermission(
-                activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void getWritePermission(Activity activity) {
-
-        if (!canWrite(activity)) {
-            final String[] wantPermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            ActivityCompat.requestPermissions(activity, wantPermissions, REQUEST_WRITE_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_WRITE_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Got permission - all is good
-                PLog.printf(PLOG_INFO, "AllThreadPenalty", "Got write permission");
-            } else {
-                // Failed to get permission - we are in trouble
-                PLog.printf(PLOG_ERROR, "AllThreadPenalty", "Failed to get write permission");
-            }
+    private void getWritePermission() {
+        if (!canWrite(requireContext())) {
+            requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
     }
 

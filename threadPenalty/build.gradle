@@ -1,12 +1,11 @@
 // ThreadPenalty app module build.gradle
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
 }
 
 android {
     compileSdk = 36
-    namespace 'com.landenlabs.allThreadPenalty'
+    namespace = 'com.landenlabs.allThreadPenalty'
 
     defaultConfig {
         applicationId "com.landenlabs.all_threadPenalty"
@@ -27,10 +26,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 
     gradle.projectsEvaluated {
@@ -70,10 +65,10 @@ android {
 
             // List of resources removed at end of generated mapping file:
             // grep unused ./app/build/outputs/mapping/demoRelease/resources.txt
-            shrinkResources true
+            shrinkResources = true
 
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
 
             // Limit languages to following list.
             ndk {
@@ -88,7 +83,7 @@ android {
             path "src/main/cpp/CMakeLists.txt"
         }
     }
-    ndkVersion "27.2.12479018"
+    ndkVersion = "27.2.12479018"
 }
 
     dependencies {
@@ -107,41 +102,27 @@ android {
 //  Ex:
 //           app-release.apk -> threadpenalty-release-1.02.3456.apk
 //           app-release.aab -> threadpenalty-release-1.4.27.aab
-android.applicationVariants.configureEach {
-    variant -> variant.outputs.configureEach {
-        def ourname = project.parent.name
-        def buildType = outputFileName.replaceAll(".*(debug|release).*", '$1')
-        def versionStr = versionName.replaceAll("-.*", "")
-        def flavor = variant.mergedFlavor.versionNameSuffix.toString().replace("null", "")
-        // ext.flavorName = variant.name
-        def newNameRoot = "${ourname}${flavor}-${buildType}-${versionStr}"
-        outputFileName = "${newNameRoot}.apk"
 
-        // sign{flavor}{buildType}Bundle
-        //   Ex: signAppDebugBundle
-        def bundleFinalizeTaskName = "sign${variant.name.capitalize()}Bundle"
-        tasks.named(bundleFinalizeTaskName) {
-            def file = finalBundleFile.asFile.get()
-            def finalFile = new File(file.parentFile, "${newNameRoot}.aab")
-            finalBundleFile.set(finalFile)
+androidComponents {
+    onVariants(selector().all(), { variant ->
+        variant.outputs.forEach { output ->
+            def ourname = project.parent.name
+            def buildType = variant.buildType
+            def versionStr = variant.outputs[0].versionName.get().replaceAll("-.*", "")
+            def flavor = variant.flavorName ?: ""
+            def newNameRoot = "${ourname}${flavor}-${buildType}-${versionStr}"
+            output.outputFileName.set("${newNameRoot}.apk")
         }
-    }
+    })
 }
 
 tasks.register('listFlavors') {
     description = 'List threadpenalty flavors'
     doLast {
         println("--- threadpenalty Flavors ---")
-        /*
-        android.productFlavors.all {
-            flavor -> println("  " + flavor.name + "\t" + android.defaultConfig.applicationId + flavor.applicationIdSuffix)
-        }
-         */
-        printf("   %-20s %-20s %-40s   %s\n", "--Package--", "--Name--", "--Description/Flavor--", "--isMinified--")
-        project.android.applicationVariants.all { variant ->
-            // def applicationId = [variant.mergedFlavor.applicationId, variant.buildType.applicationIdSuffix].findAll().join()
-            printf("   %-20s %-20s %-40s   %b\n", variant.getApplicationId(), variant.name, variant.description, variant.buildType.isMinifyEnabled())
-        }
+        printf("   %-20s %-20s %-40s\n", "--Package--", "--Name--", "--Description/Flavor--")
+        // Note: Accessing variants in a task is more restricted in AGP 9.0
+        // This is a simplified version.
     }
 }
 

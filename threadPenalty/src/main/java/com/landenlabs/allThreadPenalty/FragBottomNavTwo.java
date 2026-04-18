@@ -32,24 +32,30 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.MenuCompat;
+import androidx.core.view.MenuProvider;
 
 /**
  * A simple [Fragment] subclass.
  */
-public class FragBottomNavTwo extends FragBottomNavBase {
+public class FragBottomNavTwo extends FragBottomNavBase implements MenuProvider {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, R.layout.frag_bottom_nav_two);
-        this.setHasOptionsMenu(true);   // See onCreateOptionsMenu
+        requireActivity().addMenuProvider(this, getViewLifecycleOwner());
         setBarTitle("Two");
         return root;
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+    public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
         MenuCompat.setGroupDividerEnabled(menu, true);
-        inflater.inflate(R.menu.menu_settings_two, menu);
+        menuInflater.inflate(R.menu.menu_settings_two, menu);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(@NonNull android.view.MenuItem menuItem) {
+        return false;
     }
 
     @Override
