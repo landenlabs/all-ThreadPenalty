@@ -1,7 +1,8 @@
 
 # LanDen Labs - Thread Locality Penalty 
-Android 29-Jan-2020
-[Home website](https://landenlabs.com/android/index.html)  
+<br>18-Arp-2026
+<br>API 36 AndroidX Java
+<br>[Home website](https://landenlabs.com/android/index.html)  
 
 <img src="screenshots/landenlabs.webp" width="300" alt="Logo">
 
@@ -83,7 +84,7 @@ Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads sl
 ## License  
   
 ```  
-Copyright 2020 Dennis Lang  
+Copyright 2026 Dennis Lang  
   
 Licensed under the Apache License, Version 2.0 (the "License");  
 you may not use this file except in compliance with the License.  

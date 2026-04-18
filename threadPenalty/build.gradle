@@ -85,7 +85,6 @@ android {
     }
     ndkVersion = "27.2.12479018"
 }
-
     dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.material:material:1.13.0'
@@ -106,11 +105,11 @@ android {
 androidComponents {
     onVariants(selector().all(), { variant ->
         variant.outputs.forEach { output ->
-            def ourname = project.parent.name
+            def ourName = project.parent.name
             def buildType = variant.buildType
             def versionStr = variant.outputs[0].versionName.get().replaceAll("-.*", "")
             def flavor = variant.flavorName ?: ""
-            def newNameRoot = "${ourname}${flavor}-${buildType}-${versionStr}"
+            def newNameRoot = "${ourName}${flavor}-${buildType}-${versionStr}"
             output.outputFileName.set("${newNameRoot}.apk")
         }
     })
