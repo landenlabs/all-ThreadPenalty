@@ -3,7 +3,7 @@
 Android 29-Jan-2020
 [Home website](https://landenlabs.com/android/index.html)  
 
-<img src="screehshots/landenlabs.webp" width="300" alt="Logo">
+<img src="screenshots/landenlabs.webp" width="300" alt="Logo">
 
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
 
