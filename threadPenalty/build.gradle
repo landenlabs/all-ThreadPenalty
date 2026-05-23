@@ -1,20 +1,21 @@
 // ThreadPenalty app module build.gradle
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")     // Prevents duplicate kotlin warnings
+    id 'com.android.application'
 }
 
 android {
-    compileSdk 35
-    namespace 'com.landenlabs.allThreadPenalty'
+    compileSdk = 36
+    namespace = 'com.landenlabs.allThreadPenalty'
 
     defaultConfig {
         applicationId "com.landenlabs.all_threadPenalty"
-        minSdkVersion 26
-        targetSdkVersion 35
+        minSdk = 26
+        targetSdk = 36
 
-        versionCode 30701
-        versionName '3.07.01'
+        versionCode = 60419
+        versionName = '6.04.19'
+        // Restore the versionName resource for layouts
+        resValue "string", "versionName", "v" + versionName
 
         // Limit languages to following list.
         resourceConfigurations += ['en', 'es']
@@ -22,9 +23,9 @@ android {
         buildConfigField "long", "BuildTimeMilli", System.currentTimeMillis() + "L"
     }
 
-    // Save app version in string so resource can be used in layouts
-    applicationVariants.configureEach { variant ->
-        variant.resValue "string", "versionName", "v" + variant.versionName
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     gradle.projectsEvaluated {
@@ -52,7 +53,10 @@ android {
         println("Setting release to " + signingConfigs.release.storeFile.absolutePath )
     }
 
-    buildFeatures.buildConfig = true
+    buildFeatures {
+        buildConfig = true
+        resValues = true
+    }
 
     buildTypes {
         release {
@@ -61,10 +65,10 @@ android {
 
             // List of resources removed at end of generated mapping file:
             // grep unused ./app/build/outputs/mapping/demoRelease/resources.txt
-            shrinkResources true
+            shrinkResources = true
 
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig = signingConfigs.release
 
             // Limit languages to following list.
             ndk {
@@ -74,26 +78,19 @@ android {
         }
     }
 
-    // Save app version in string so resource can be used in layouts
-    applicationVariants.configureEach { variant ->
-        variant.resValue "string", "versionName", "v" + variant.versionName
-    }
-
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
         }
     }
+    ndkVersion = "27.2.12479018"
 }
+    dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.13.0'
 
-dependencies {
-    // implementation 'androidx.annotation:annotation:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.material:material:1.12.0'
-    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
-    implementation 'androidx.navigation:navigation-fragment:2.9.0'
-    implementation 'androidx.navigation:navigation-ui:2.9.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.9.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.9.7'
 
     // Line Graph https://github.com/jjoe64/GraphView
     implementation 'com.jjoe64:graphview:4.2.2'
@@ -104,41 +101,27 @@ dependencies {
 //  Ex:
 //           app-release.apk -> threadpenalty-release-1.02.3456.apk
 //           app-release.aab -> threadpenalty-release-1.4.27.aab
-android.applicationVariants.configureEach {
-    variant -> variant.outputs.configureEach {
-        def ourname = project.parent.name
-        def buildType = outputFileName.replaceAll(".*(debug|release).*", '$1')
-        def versionStr = versionName.replaceAll("-.*", "")
-        def flavor = variant.mergedFlavor.versionNameSuffix.toString().replace("null", "")
-        // ext.flavorName = variant.name
-        def newNameRoot = "${ourname}${flavor}-${buildType}-${versionStr}"
-        outputFileName = "${newNameRoot}.apk"
 
-        // sign{flavor}{buildType}Bundle
-        //   Ex: signAppDebugBundle
-        def bundleFinalizeTaskName = "sign${variant.name.capitalize()}Bundle"
-        tasks.named(bundleFinalizeTaskName) {
-            def file = finalBundleFile.asFile.get()
-            def finalFile = new File(file.parentFile, "${newNameRoot}.aab")
-            finalBundleFile.set(finalFile)
+androidComponents {
+    onVariants(selector().all(), { variant ->
+        variant.outputs.forEach { output ->
+            def ourName = project.parent.name
+            def buildType = variant.buildType
+            def versionStr = variant.outputs[0].versionName.get().replaceAll("-.*", "")
+            def flavor = variant.flavorName ?: ""
+            def newNameRoot = "${ourName}${flavor}-${buildType}-${versionStr}"
+            output.outputFileName.set("${newNameRoot}.apk")
         }
-    }
+    })
 }
 
 tasks.register('listFlavors') {
     description = 'List threadpenalty flavors'
     doLast {
         println("--- threadpenalty Flavors ---")
-        /*
-        android.productFlavors.all {
-            flavor -> println("  " + flavor.name + "\t" + android.defaultConfig.applicationId + flavor.applicationIdSuffix)
-        }
-         */
-        printf("   %-20s %-20s %-40s   %s\n", "--Package--", "--Name--", "--Description/Flavor--", "--isMinified--")
-        project.android.applicationVariants.all { variant ->
-            // def applicationId = [variant.mergedFlavor.applicationId, variant.buildType.applicationIdSuffix].findAll().join()
-            printf("   %-20s %-20s %-40s   %b\n", variant.getApplicationId(), variant.name, variant.description, variant.buildType.isMinifyEnabled())
-        }
+        printf("   %-20s %-20s %-40s\n", "--Package--", "--Name--", "--Description/Flavor--")
+        // Note: Accessing variants in a task is more restricted in AGP 9.0
+        // This is a simplified version.
     }
 }
 

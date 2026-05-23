@@ -37,6 +37,7 @@ public class SaveUtil {
 
         while (it.hasNext()) {
             String bundleKey = it.next();
+            @SuppressWarnings("deprecation")
             Object o = preferences.get(bundleKey);
             String itemKey = prefKeyPrefix + bundleKey;
             if (o == null) {

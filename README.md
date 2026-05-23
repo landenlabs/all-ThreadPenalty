@@ -1,8 +1,17 @@
 
 # LanDen Labs - Thread Locality Penalty 
+<<<<<<< HEAD
 Android 29-Jan-2020
 [Home website](https://LanDenLabs.com/android/index.html)  
   
+=======
+<br>18-Arp-2026
+<br>API 36 AndroidX Java
+<br>[Home website](https://landenlabs.com/android/index.html)  
+
+<img src="screenshots/landenlabs.webp" width="300" alt="Logo">
+
+>>>>>>> 14f61af6363cc0bcde56040795417bcdc9383844
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
 
 Using C++ Threads, access memory from multiple threads and measure access time. Plot graph of access time based on distance between memory locations accessed by concurrent threads.
@@ -81,7 +90,7 @@ Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads sl
 ## License  
   
 ```  
-Copyright 2020 Dennis Lang  
+Copyright 2026 Dennis Lang  
   
 Licensed under the Apache License, Version 2.0 (the "License");  
 you may not use this file except in compliance with the License.  
