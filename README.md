@@ -1,16 +1,22 @@
 
 # LanDen Labs - Thread Locality Penalty 
+<<<<<<< HEAD
+Android 29-Jan-2020
+[Home website](https://LanDenLabs.com/android/index.html)  
+  
+=======
 <br>18-Arp-2026
 <br>API 36 AndroidX Java
 <br>[Home website](https://landenlabs.com/android/index.html)  
 
 <img src="screenshots/landenlabs.webp" width="300" alt="Logo">
 
+>>>>>>> 14f61af6363cc0bcde56040795417bcdc9383844
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
 
 Using C++ Threads, access memory from multiple threads and measure access time. Plot graph of access time based on distance between memory locations accessed by concurrent threads.
 
-[Article on Thread Locality Penalty](https://landenlabs.com/code/locality.html)
+[Article on Thread Locality Penalty](https://LanDenLabs.com/code/locality.html)
 
 ## NOTES on App
 
@@ -73,9 +79,9 @@ Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads sl
 
 ## Web Page  
   
-[Home web page](https://landenlabs.com/android/index.html) for more information.  
+[Home web page](https://LanDenLabs.com/android/index.html) for more information.  
 
-[Discussion about Thread Locality Penalty](https://landenlabs.com/code/locality.html)
+[Discussion about Thread Locality Penalty](https://LanDenLabs.com/code/locality.html)
 
 [CPU hardware cache ](https://mechanical-sympathy.blogspot.com/2013/02/cpu-cache-flushing-fallacy.html)
  
@@ -99,5 +105,5 @@ limitations under the License.
 ```   
   
 [To Top](#table)  
-<br>[Home website](https://landenlabs.com/android/index.html)
+<br>[Home website](https://LanDenLabs.com/android/index.html)
 
