@@ -8,7 +8,7 @@ android {
     namespace = 'com.landenlabs.allThreadPenalty'
 
     defaultConfig {
-        applicationId "com.landenlabs.all_threadPenalty"
+        applicationId = "com.landenlabs.all_threadPenalty"
         minSdk = 26
         targetSdk = 36
 
@@ -24,8 +24,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     gradle.projectsEvaluated {
@@ -61,7 +61,7 @@ android {
     buildTypes {
         release {
             // Enables code shrinking, obfuscation, and optimization.
-            minifyEnabled true
+            minifyEnabled = true
 
             // List of resources removed at end of generated mapping file:
             // grep unused ./app/build/outputs/mapping/demoRelease/resources.txt
@@ -86,7 +86,7 @@ android {
     ndkVersion = "27.2.12479018"
 }
     dependencies {
-    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.appcompat:appcompat:1.8.0'
     implementation 'com.google.android.material:material:1.14.0'
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.9.8'

@@ -1,17 +1,11 @@
+# LanDen Labs - Thread Locality Penalty
 
-# LanDen Labs - Thread Locality Penalty 
-<<<<<<< HEAD
-Android 29-Jan-2020
-[Home website](https://LanDenLabs.com/android/index.html)  
-  
-=======
-<br>18-Arp-2026
+<br>18-Apr-2026
 <br>API 36 AndroidX Java
-<br>[Home website](https://landenlabs.com/android/index.html)  
+<br>[Home website](https://landenlabs.com/android/index.html)
 
 <img src="screenshots/landenlabs.webp" width="300" alt="Logo">
 
->>>>>>> 14f61af6363cc0bcde56040795417bcdc9383844
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
 
 Using C++ Threads, access memory from multiple threads and measure access time. Plot graph of access time based on distance between memory locations accessed by concurrent threads.
@@ -31,7 +25,6 @@ The *share* button works to send a sample screen shot.
 * MinSDK 23
 * Using **AndroidX** libraries
 
-  
 [![Known Vulnerabilities](https://snyk.io/test/github/landenlabs/all-ThreadPenalty/badge.svg)](https://snyk.io/test/github/landenlabs/all-ThreadPenalty)
 
 
@@ -73,7 +66,7 @@ Google Nexus 5x - Graph shows very odd timing (need to repeat test)
 Samsung Galaxy S10 (64 bit) - Graph shows that the concurrent access to similar locations is slower.
 ![Galaxy S10](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s10-landscape-done.jpg)
 
-Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads slower then far apart access. 
+Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads slower than far apart access. 
 ![Galaxy s5](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s5-landscape-done.jpg)
 
 
@@ -87,23 +80,24 @@ Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads sl
  
  [Herb Sutter discussion on Thread Penalty](https://www.drdobbs.com/parallel/maximize-locality-minimize-contention/208200273) 
   
-## License  
-  
-```  
-Copyright 2026 Dennis Lang  
-  
-Licensed under the Apache License, Version 2.0 (the "License");  
-you may not use this file except in compliance with the License.  
-You may obtain a copy of the License at  
-  
- https://www.apache.org/licenses/LICENSE-2.0  
-Unless required by applicable law or agreed to in writing, software  
-distributed under the License is distributed on an "AS IS" BASIS,  
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
-See the License for the specific language governing permissions and  
-limitations under the License.  
-```   
-  
-[To Top](#table)  
+### License
+
+```
+Copyright 2026 Dennis Lang (LanDen Labs)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+See [LICENSE](LICENSE) for the full license text.
+
+[To Top](#landen-labs---thread-locality-penalty)  
 <br>[Home website](https://LanDenLabs.com/android/index.html)
 
