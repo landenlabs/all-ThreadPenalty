@@ -4,7 +4,7 @@
 <br>API 36 AndroidX Java
 <br>[Home website](https://landenlabs.com/android/index.html)
 
-<img src="screenshots/landenlabs.webp" width="300" alt="Logo">
+<img src="screens/landenlabs.webp" width="300" alt="Logo">
 
 Measure Thread Locality Penalty which is the extra time wasted when multiple threads access memory close together.  Concurrent memory modification can cause CPU memory caches to get invalidated inflicting extra time on the 2nd thread accessing the cached memory location.
 
@@ -32,42 +32,42 @@ The *share* button works to send a sample screen shot.
 
 Starting test in Portrait mode - shows graph and thread messages.
 <p>
-<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-2.jpg" width="300">
+<img src="screens/test-portrait-running-2.jpg" width="300">
 
 <p>
 Pressing on Thread Messages expand icon cycles height of Message area:<br>
-<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/test-portrait-running-3.jpg" width="300">
+<img src="screens/test-portrait-running-3.jpg" width="300">
 <p>
  
 **Samples of App User Interface:**
 <p>
 About page <br>
-<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/about-page.jpg" width="300">    
+<img src="screens/about-page.jpg" width="300">    
 <p>
 Side Navigation <br>
-<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/side-nav.jpg" width="300"> 
+<img src="screens/side-nav.jpg" width="300"> 
 <p>
 Side Menu <br>
-<img src="https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/side-menu.jpg" width="300"> 
+<img src="screens/side-menu.jpg" width="300"> 
   
 <p>  
 **Graphs from several devices in Landscape mode:**
 
 Google Pixel1 - Graph shows that the concurrent access to similar locations is slower.
-![Pixel 1](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel1-landscape-done.jpg)
+![Pixel 1](screens/pixel1-landscape-done.jpg)
 
 Google Pixel 2 - Graph shows that the concurrent access to similar locations is slower.
-![Pixel 2](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/pixel2-landscape-done.jpg)
+![Pixel 2](screens/pixel2-landscape-done.jpg)
 
 Google Nexus 5x - Graph shows very odd timing (need to repeat test)
-![Nexus5x](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/nexus5x-landscape-done.jpg)
+![Nexus5x](screens/nexus5x-landscape-done.jpg)
 
 
 Samsung Galaxy S10 (64 bit) - Graph shows that the concurrent access to similar locations is slower.
-![Galaxy S10](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s10-landscape-done.jpg)
+![Galaxy S10](screens/galaxy-s10-landscape-done.jpg)
 
 Samsung Galaxy S5 (32bit) - Similar graph, similar location access by threads slower than far apart access. 
-![Galaxy s5](https://raw.githubusercontent.com/landenlabs/all-ThreadPenalty/master/screenshots/galaxy-s5-landscape-done.jpg)
+![Galaxy s5](screens/galaxy-s5-landscape-done.jpg)
 
 
 ## Web Page  
